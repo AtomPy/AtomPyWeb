@@ -1,0 +1,1 @@
+This file is just to make sure that this folder (Temp) gets carried into Github so that anyone downloading the server will not get errors because a temp file doesnt exist.
