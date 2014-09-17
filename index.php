@@ -14,5 +14,12 @@ N: <input type="text" name="N" size="2">
 <input type="file" name="file" id="file">
 <input type="submit" value="Upload File">
 </form>
+<h4>View Files</h4>
+<form action="viewFile.php" method="post">
+Z: <input type="text" name="Z" size="2">
+N: <input type="text" name="N" size="2">
+<input type="hidden" name="SheetNum" value="0">
+<br><input type="submit" value="View File">
+</form>
 </center>
 </html>
