@@ -13,6 +13,11 @@
 #backup folder with the current date/time. A new index file will
 #then be created with the most up to date file times.
 
+#Additionally, there is a file in the Backups folder called
+#Listings.txt. This file is a CSV list of all the files in the
+#database. Each line goes like so: filename, # of backups for
+#that particular file, backupDate1, backupDate2, backupDate3...
+
 #Imports
 import sys, time, os, shutil
 
