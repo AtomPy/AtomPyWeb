@@ -7,7 +7,7 @@
 ########################
 
 #Import necessary plugins
-import openpyxl, os, sys
+import openpyxl, os, sys, time
 import sys, json, locale
 locale.setlocale(locale.LC_ALL, '')
 
@@ -15,6 +15,7 @@ locale.setlocale(locale.LC_ALL, '')
 Z = int(sys.argv[1])
 N = int(sys.argv[2])
 SheetNum = int(sys.argv[3])
+BackupArg = str(sys.argv[4])
 
 #Build the filename string
 filename = ''
@@ -30,17 +31,21 @@ else:
 filename = filename + '.xlsx'
 
 #Now open the file
-wb = openpyxl.load_workbook(filename)
+wb = None
+if BackupArg == str(-1):
+	wb = openpyxl.load_workbook('C:\\wamp\\www\\Database\\' + filename)
+else:
+	wb = openpyxl.load_workbook('C:\\wamp\\www\\Backups\\' + BackupArg + '\\' + filename)
 
 #Get the sheet
 ws = wb.get_sheet_by_name(wb.get_sheet_names()[SheetNum])
-	
+
 #Get the column widths
 column_widths = []
 for i in range(len(ws.columns)):
 	if ws.column_dimensions[openpyxl.cell.get_column_letter(i+1)].width != None:
 		column_widths.append(ws.column_dimensions[openpyxl.cell.get_column_letter(i+1)].width)
-	
+
 #Get the headerRow
 headerRow = -1
 for i in range(len(ws.rows)):
@@ -55,15 +60,32 @@ webpage = ''
 #Add backup revisions selection table
 avaliableBackups = []
 backupFolders = os.listdir('C:\\wamp\\www\\Backups\\')
+webpage += '<table style="width:300px">'
 for i in range(len(backupFolders)):
 	if filename in os.listdir('C:\\wamp\\www\\Backups\\' + backupFolders[i]):
 		avaliableBackups.append(backupFolders[i])
 if len(avaliableBackups) == 0:
-	webpage += '<p>No backups for this file avaliable...</p>'
+	webpage += '<tr><td>No backups for this file avaliable...</td></tr>'
 else:
-	webpage += '<p>Backups avaliable:<br></p>'
+	webpage += '<tr><td>Backups avaliable:<br></td></tr>'
+	#Show option for the current version of the file
+	webpage += '<tr><td><form action="viewFile.php" method="post">'
+	webpage += '<input type="hidden" name="Z" value=' + str(Z)
+	webpage += '><input type="hidden" name="N" value=' + str(N)
+	webpage += '><input type="hidden" name="SheetNum" value=' + str(SheetNum)
+	webpage += '><input type="hidden" name="BackupArg" value="-1">'
+	webpage += '<input type="submit" value="Current Version"></form></td></tr>'
+	#Show options for the last versions of the file
 	for i in range(len(avaliableBackups)):
-		webpage += '<p>' + 
+		webpage += '<tr><td><form action="viewFile.php" method="post">'
+		webpage += '<input type="hidden" name="Z" value=' + str(Z)
+		webpage += '><input type="hidden" name="N" value=' + str(N)
+		webpage += '><input type="hidden" name="SheetNum" value=' + str(SheetNum)
+		webpage += '><input type="hidden" name="BackupArg" value="'
+		webpage += avaliableBackups[i] + '">'
+		webpage += '<input type="submit" value="' + avaliableBackups[i]
+		webpage += '"></form></td></tr>'
+webpage += '</table><br><br>'
 
 #Add the sheet selection table
 webpage += '<table style="width:300px"><tr>'
@@ -72,7 +94,8 @@ for i in range(len(wb.get_sheet_names())):
 	webpage += '<input type="hidden" name="Z" value=' + str(Z)
 	webpage += '><input type="hidden" name="N" value=' + str(N)
 	webpage += '><input type="hidden" name="SheetNum" value=' + str(i)
-	webpage += '><input type="submit" value="' + wb.get_sheet_by_name(wb.get_sheet_names()[i]).title
+	webpage += '><input type="hidden" name="BackupArg" value="-1">'
+	webpage += '<input type="submit" value="' + wb.get_sheet_by_name(wb.get_sheet_names()[i]).title
 	webpage += '"></form></td>'
 webpage += '</tr></table><br><br>'
 

@@ -40,8 +40,6 @@ else:
 		if backupFolders[i] > backupFolders[lastBackup]:
 			lastBackup = i
 			
-	print 'Latest backup: ' + backupFolders[lastBackup]
-			
 	#Now open the index file of the latest backup, read in the
 	#backup information, and close the index file
 	f = open('C:\\wamp\\www\\Backups\\' + backupFolders[lastBackup] + '\\index.txt','rb')

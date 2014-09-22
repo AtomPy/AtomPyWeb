@@ -18,10 +18,12 @@ N: <input type="text" name="N" size="2"><br><br>
 <input type="submit" value="Upload File">
 </form><br><br>
 <h4>View Files Through Browser</h4>
+<p>Enter the Z and N values of the atomic files you wish to view.</p>
 <form action="viewFile.php" method="post">
 Z: <input type="text" name="Z" size="2">
 N: <input type="text" name="N" size="2">
 <input type="hidden" name="SheetNum" value="0">
+<input type="hidden" name="BackupArg" value="-1">
 <br><input type="submit" value="View File">
 </form>
 </center>
