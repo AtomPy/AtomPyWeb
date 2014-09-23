@@ -1,9 +1,10 @@
 ########################
-# AtomPy WebAPI
-# Created by Josiah Boswell
+# WebAPI Python Script for AtomPy 2.0
+# Created by Josiah Lucas Boswell (www.josiahboswell.com)
 # Is called by a PHP script with parameters for Z and N,
-# a paramater for the sheet number, 
-# and returns a webpage.
+# a paramater for the sheet number, and a backup argument.
+# It then returns the HTML code from a webpage displayment
+# of the requested file.
 ########################
 
 #Import necessary plugins
@@ -33,9 +34,9 @@ filename = filename + '.xlsx'
 #Now open the file
 wb = None
 if BackupArg == str(-1):
-	wb = openpyxl.load_workbook('C:\\wamp\\www\\Database\\' + filename)
+	wb = openpyxl.load_workbook('Database//' + filename)
 else:
-	wb = openpyxl.load_workbook('C:\\wamp\\www\\Backups\\' + BackupArg + '\\' + filename)
+	wb = openpyxl.load_workbook('Backups//' + BackupArg + '//' + filename)
 
 #Get the sheet
 ws = wb.get_sheet_by_name(wb.get_sheet_names()[SheetNum])
@@ -59,10 +60,10 @@ webpage = ''
 
 #Add backup revisions selection table
 avaliableBackups = []
-backupFolders = os.listdir('C:\\wamp\\www\\Backups\\')
+backupFolders = os.listdir('Backups//')
 webpage += '<table style="width:300px">'
 for i in range(len(backupFolders)):
-	if filename in os.listdir('C:\\wamp\\www\\Backups\\' + backupFolders[i]):
+	if filename in os.listdir('Backups//' + backupFolders[i]):
 		avaliableBackups.append(backupFolders[i])
 if len(avaliableBackups) == 0:
 	webpage += '<tr><td>No backups for this file avaliable...</td></tr>'

@@ -1,3 +1,9 @@
+<?php
+/* View File PHP Script for AtomPy 2.0
+ * Created by Josiah Lucas Boswell (www.josiahboswell.com)
+ * Takes queries and sends them to the python script.
+ */
+?>
 <style>
 table,th,td
 {
@@ -27,4 +33,5 @@ $result = shell_exec("python WebAPI.py $Z $N $SheetNum $BackupArg 2>&1");
 $result = json_decode($result);
 echo $result;
 
+//Created by Josiah Lucas Boswell (www.josiahboswell.com)
 ?>

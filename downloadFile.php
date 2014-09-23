@@ -1,4 +1,12 @@
 <?php
+/* Download File PHP Script for AtomPy 2.0
+ * Created by Josiah Lucas Boswell (www.josiahboswell.com)
+ * Takes arguements for the file the user wants and either
+ * downloads the file from Google Drive or finds it in the
+ * local AtomPy database. The file is then pushed to the
+ * browser.
+ */
+ 
 //Get our args
 $Z = (string)$_POST["Z"];
 $N = (string)$_POST["N"];

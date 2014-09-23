@@ -1,3 +1,12 @@
+########################
+# Download API Python Script for AtomPy 2.0
+# Created by Josiah Lucas Boswell (www.josiahboswell.com)
+#
+# Has everything needed for accessing, querying, and 
+# downloading from the Google Drive Database.
+########################
+
+
 import httplib2
 
 import sys, xlrd, xlwt

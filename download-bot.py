@@ -1,3 +1,12 @@
+########################
+# Download Bot Python Script for AtomPy 2.0
+# Created by Josiah Lucas Boswell (www.josiahboswell.com)
+# 
+# Takes arguments for the file that the user wants,
+# searches the Google Drive Database for it, and then
+# returns it to the PHP script.
+########################
+
 import DownloadAPI as API
 import sys, time, os.path
 
@@ -42,7 +51,7 @@ if database == 'google':
 	else:
 			filename = filename + ".xlsx"
 			file = API.getRawFile(drive, fileList[fileIndex]['exportLinks']['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'])
-			f = open("TempFiles\\" + filename, 'wb')
+			f = open("TempFiles//" + filename, 'wb')
 			f.write(file)
 			f.close()
 			print filename
@@ -51,7 +60,7 @@ else:
 	if database == 'atompy':
 
 		filename = filename + ".xlsx"
-		if os.path.isfile("Database\\" + filename):
+		if os.path.isfile("Database//" + filename):
 			print filename
 		else:
 			print "ERROR: FILE NOT FOUND IN ATOMPY DATABASE"

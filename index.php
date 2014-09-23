@@ -1,3 +1,9 @@
+<?php
+/* Index PHP for AtomPy 2.0
+ * Created by Josiah Lucas Boswell (www.josiahboswell.com)
+ * Homepage for AtomPy.
+ */
+?>
 <html>
 <center>
 <h2><b>AtomPy Prototype Website</b></h2>

@@ -1,19 +1,30 @@
-#This program will take the file the user uploaded and the file
-#currently in the database and compare the two for data validation.
+########################
+# Upload File Python Script for AtomPy 2.0
+# Created by Josiah Lucas Boswell (www.josiahboswell.com)
+#
+# This program will take the file the user uploaded and the file
+# currently in the database and compare the two for data validation.
+########################
+
+#Includes
 import sys, os, shutil, openpyxl
 filename = str(sys.argv[1])
 
+#Directories we will be working in
+databaseDIR = "Database//"
+tempDIR = "TempFiles//"
+
 #Open our two files (the uploaded one and the one in the DB)
-wb_original = openpyxl.load_workbook("C:\\wamp\\www\\Database\\" + filename)
-wb_uploaded = openpyxl.load_workbook("C:\\wamp\\www\\TempFiles\\" + filename)
+wb_original = openpyxl.load_workbook(databaseDIR + filename)
+wb_uploaded = openpyxl.load_workbook(tempDIR + filename)
 
 #ERROR CHECK: Uploaded file should NOT be smaller than original
-if os.path.getsize("C:\\wamp\\www\\TempFiles\\" + filename) < os.path.getsize("C:\\wamp\\www\\Database\\" + filename):
+if os.path.getsize(tempDIR + filename) < os.path.getsize(databaseDIR + filename):
 	print "ERROR: Uploaded file has a size smaller than original file. Perhaps you deleted some data?"
 	sys.exit(1)
 	
 #ERROR CHECK: Uploaded file should NOT be exactly the original
-if os.path.getsize("C:\\wamp\\www\\TempFiles\\" + filename) == os.path.getsize("C:\\wamp\\www\\Database\\" + filename):
+if os.path.getsize(tempDIR + filename) == os.path.getsize(databaseDIR + filename):
 	print "ERROR: Uploaded file has the same size as the original file. Are you sure you altered data?"
 	sys.exit(1)
 	
@@ -110,5 +121,5 @@ for i in range(len(wb_original.worksheets)):
 #If we have made it to this part of the script, all the
 #original data was successfully found in the new data
 #So, replace the existing DB file with the uploaded file
-os.remove("C:\\wamp\\www\\Database\\" + filename)
-shutil.copy2("C:\\wamp\\www\\TempFiles\\" + filename, "C:\\wamp\\www\\Database\\" + filename)
+os.remove(databaseDIR + filename)
+shutil.copy2(tempDIR + filename, databaseDIR + filename)
