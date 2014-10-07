@@ -122,6 +122,6 @@ print 'HELLO'
 #If we have made it to this part of the script, all the
 #original data was successfully found in the new data
 #So, replace the existing DB file with the uploaded file
-print databaseDIR + filename
+os.chmod(databaseDIR + filename, 0777)
 os.remove(databaseDIR + filename)
 #print shutil.copyfile(location, databaseDIR + filename)
