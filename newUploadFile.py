@@ -17,10 +17,6 @@ databaseDIR = "Database//"
 #Open our two files (the uploaded one and the one in the DB)
 wb_original = openpyxl.load_workbook(databaseDIR + filename)
 wb_uploaded = openpyxl.load_workbook(location)
-t2 = wb_uploaded.active
-print t2.title
-
-print 'CAN YOU SEE THIS?!'
 
 #ERROR CHECK: Uploaded file should NOT be smaller than original
 if os.path.getsize(location) < os.path.getsize(databaseDIR + filename):
@@ -125,5 +121,5 @@ for i in range(len(wb_original.worksheets)):
 #If we have made it to this part of the script, all the
 #original data was successfully found in the new data
 #So, replace the existing DB file with the uploaded file
-os.remove(databaseDIR + filename)
-shutil.copy2(location, databaseDIR + filename)
+print os.remove(databaseDIR + filename)
+print shutil.copy2(location, databaseDIR + filename)
