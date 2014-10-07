@@ -23,11 +23,11 @@ if(!strstr($filename, 'ERROR')) {
 	header("Expires: 0");
 	header("Content-Transfer-Encoding: binary");
 	if(strstr($database,'google')) {
-		readfile('TempFiles\\' . $filename, true);
-		unlink('TempFiles\\' . $filename);
+		readfile('TempFiles//' . $filename, true);
+		unlink('TempFiles//' . $filename);
 	}
 	if(strstr($database,'atompy')) {
-		readfile('Database\\' . $filename, true);
+		readfile('Database//' . $filename, true);
 	}
 	
 } else {
