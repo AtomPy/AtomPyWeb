@@ -117,7 +117,7 @@ for i in range(len(wb_original.worksheets)):
 	if -1 in found:
 		print 'ERROR: Some original data not found in new data.'
 		sys.exit(1)
-					
+print 'HELLO'
 #If we have made it to this part of the script, all the
 #original data was successfully found in the new data
 #So, replace the existing DB file with the uploaded file
