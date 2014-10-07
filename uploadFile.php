@@ -10,9 +10,11 @@
 
 //Get the uploaded files temp location
 $tempLocation = $_FILES["file"]["tmp_name"];
+echo $tempLocation;
 
 //Get our filename
 $filename = $_FILES["file"]["name"];
+echo $filename;
 
 //Save the temp file to a nicer place
 move_uploaded_file($tempLocation, "TempFiles//" . $filename);
