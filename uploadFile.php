@@ -32,5 +32,5 @@ if(strstr($result, 'ERROR')) {
 }
 
 //Delete the uploaded file from tempFiles
-unlink("TempFiles//" . $filename);
+//unlink("TempFiles//" . $filename);
 ?>
