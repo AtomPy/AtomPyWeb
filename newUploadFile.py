@@ -9,22 +9,22 @@
 #Includes
 import sys, os, shutil, openpyxl
 filename = str(sys.argv[1])
+location = str(sys.argv[2])
 
 #Directories we will be working in
 databaseDIR = "Database//"
-tempDIR = "TempFiles//"
 
 #Open our two files (the uploaded one and the one in the DB)
 wb_original = openpyxl.load_workbook(databaseDIR + filename)
-wb_uploaded = openpyxl.load_workbook(tempDIR + filename)
+wb_uploaded = openpyxl.load_workbook(location)
 
 #ERROR CHECK: Uploaded file should NOT be smaller than original
-if os.path.getsize(tempDIR + filename) < os.path.getsize(databaseDIR + filename):
+if os.path.getsize(location) < os.path.getsize(databaseDIR + filename):
 	print "ERROR: Uploaded file has a size smaller than original file. Perhaps you deleted some data?"
 	sys.exit(1)
 	
 #ERROR CHECK: Uploaded file should NOT be exactly the original
-if os.path.getsize(tempDIR + filename) == os.path.getsize(databaseDIR + filename):
+if os.path.getsize(location) == os.path.getsize(databaseDIR + filename):
 	print "ERROR: Uploaded file has the same size as the original file. Are you sure you altered data?"
 	sys.exit(1)
 	
@@ -122,4 +122,4 @@ for i in range(len(wb_original.worksheets)):
 #original data was successfully found in the new data
 #So, replace the existing DB file with the uploaded file
 os.remove(databaseDIR + filename)
-shutil.copy2(tempDIR + filename, databaseDIR + filename)
+shutil.copy2(location, databaseDIR + filename)

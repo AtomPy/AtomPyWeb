@@ -19,11 +19,8 @@ echo $tempLocation;
 $filename = $_FILES["file"]["name"];
 echo $filename;
 
-//Save the temp file to a nicer place
-echo move_uploaded_file($tempLocation, "TempFiles//" . $filename);
-
 //Pass the filename to the python script for processing
-$result = (string)shell_exec("python newUploadFile.py $filename");
+$result = (string)shell_exec("python newUploadFile.py $filename $tempLocation");
 
 //See if the upload was successful
 if(strstr($result, 'ERROR')) {
