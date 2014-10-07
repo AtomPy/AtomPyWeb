@@ -117,11 +117,9 @@ for i in range(len(wb_original.worksheets)):
 	if -1 in found:
 		print 'ERROR: Some original data not found in new data.'
 		sys.exit(1)
-print 'HELLO'
-print 'HELLO'
+
 #If we have made it to this part of the script, all the
 #original data was successfully found in the new data
 #So, replace the existing DB file with the uploaded file
-os.chmod(databaseDIR + filename, 0777)
 os.remove(databaseDIR + filename)
-#print shutil.copyfile(location, databaseDIR + filename)
+#shutil.copy2(location, databaseDIR + filename)

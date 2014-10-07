@@ -19,7 +19,6 @@ $filename = $_FILES["file"]["name"];
 
 //Pass the filename to the python script for processing
 $result = (string)shell_exec("python newUploadFile.py $filename $tempLocation 2>&1");
-echo 'called\n';
 
 //See if the upload was successful
 if(strstr($result, 'ERROR')) {
@@ -32,5 +31,5 @@ if(strstr($result, 'ERROR')) {
 	//Print Success
 	echo "SUCCESSFULLY UPLOADED FILE!";
 }
-echo 'ended\n';
+
 ?>
