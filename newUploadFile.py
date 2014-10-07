@@ -17,6 +17,8 @@ databaseDIR = "Database//"
 #Open our two files (the uploaded one and the one in the DB)
 wb_original = openpyxl.load_workbook(databaseDIR + filename)
 wb_uploaded = openpyxl.load_workbook(location)
+t2 = wb_uploaded.active
+print t2.title
 
 #ERROR CHECK: Uploaded file should NOT be smaller than original
 if os.path.getsize(location) < os.path.getsize(databaseDIR + filename):

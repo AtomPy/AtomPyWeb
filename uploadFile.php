@@ -14,10 +14,10 @@ error_reporting(E_ALL);
 //Get the uploaded files temp location
 $tempLocation = $_FILES["file"]["tmp_name"];
 echo $tempLocation;
+echo "\n";
 
 //Get our filename
 $filename = $_FILES["file"]["name"];
-echo $filename;
 
 //Pass the filename to the python script for processing
 $result = (string)shell_exec("python newUploadFile.py $filename $tempLocation");
@@ -32,7 +32,4 @@ if(strstr($result, 'ERROR')) {
 	//Print Success
 	echo "SUCCESSFULLY UPLOADED FILE!";
 }
-
-//Delete the uploaded file from tempFiles
-//unlink("TempFiles//" . $filename);
 ?>
