@@ -117,7 +117,7 @@ for i in range(len(ws.rows)):
 		
 		#Begin column with text alignment and spanning
 		webpage += "<td id='"
-		if cCell.style.number_format.format_code == 'General':
+		if cCell.style.number_format == 'General':
 			webpage += "left'"
 		else:
 			webpage += "right'"
