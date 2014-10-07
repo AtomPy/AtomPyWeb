@@ -15,7 +15,7 @@ $tempLocation = $_FILES["file"]["tmp_name"];
 $filename = $_FILES["file"]["name"];
 
 //Save the temp file to a nicer place
-move_uploaded_file($tempLocation, "TempFiles\\" . $filename);
+move_uploaded_file($tempLocation, "TempFiles//" . $filename);
 
 //Pass the filename to the python script for processing
 $result = (string)shell_exec("python newUploadFile.py $filename");
@@ -32,5 +32,5 @@ if(strstr($result, 'ERROR')) {
 }
 
 //Delete the uploaded file from tempFiles
-unlink("TempFiles\\" . $filename);
+unlink("TempFiles//" . $filename);
 ?>
