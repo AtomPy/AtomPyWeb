@@ -26,6 +26,7 @@ $result = (string)shell_exec("python newUploadFile.py $filename $tempLocation");
 if(strstr($result, 'ERROR')) {
 	echo $result;
 } else {
+	echo $result;
 	//Call the backup program
 	echo shell_exec("python NewBackupBot.py");
 	

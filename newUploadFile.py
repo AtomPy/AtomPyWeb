@@ -20,6 +20,8 @@ wb_uploaded = openpyxl.load_workbook(location)
 t2 = wb_uploaded.active
 print t2.title
 
+print 'CAN YOU SEE THIS?!'
+
 #ERROR CHECK: Uploaded file should NOT be smaller than original
 if os.path.getsize(location) < os.path.getsize(databaseDIR + filename):
 	print "ERROR: Uploaded file has a size smaller than original file. Perhaps you deleted some data?"
