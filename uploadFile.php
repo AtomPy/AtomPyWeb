@@ -7,6 +7,9 @@
  * program is called. The temporary file is deleted in
  * the end.
  */
+ 
+ini_set('display_errors',1);
+error_reporting(E_ALL);
 
 //Get the uploaded files temp location
 $tempLocation = $_FILES["file"]["tmp_name"];
@@ -17,7 +20,7 @@ $filename = $_FILES["file"]["name"];
 echo $filename;
 
 //Save the temp file to a nicer place
-move_uploaded_file($tempLocation, "TempFiles//" . $filename);
+echo move_uploaded_file($tempLocation, "TempFiles//" . $filename);
 
 //Pass the filename to the python script for processing
 $result = (string)shell_exec("python newUploadFile.py $filename");
