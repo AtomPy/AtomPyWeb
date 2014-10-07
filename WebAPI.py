@@ -156,7 +156,7 @@ for i in range(len(ws.rows)):
 			
 			#Add decimals, commas to numbers
 			if not (type(cCell.value) is unicode):
-				if not (cCell.style.number_format.format_code == 'Scientific'):
+				if not (cCell.style.number_format == 'Scientific'):
 					cCell.value = locale.format("%.2f", cCell.value, grouping= True)
 				else:
 					cCell.value = locale.format("%.4E", cCell.value, grouping= True)
