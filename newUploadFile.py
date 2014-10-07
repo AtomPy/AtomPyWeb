@@ -7,7 +7,7 @@
 ########################
 
 #Includes
-import sys, os, shutil, openpyxl
+import sys, time, os, shutil, openpyxl
 filename = str(sys.argv[1])
 location = str(sys.argv[2])
 
@@ -118,8 +118,3 @@ for i in range(len(wb_original.worksheets)):
 		print 'ERROR: Some original data not found in new data.'
 		sys.exit(1)
 
-#If we have made it to this part of the script, all the
-#original data was successfully found in the new data
-#So, replace the existing DB file with the uploaded file
-os.remove(databaseDIR + filename)
-#shutil.copy2(location, databaseDIR + filename)

@@ -7,7 +7,8 @@
  * program is called. The temporary file is deleted in
  * the end.
  */
- 
+
+//Extra debugging 
 ini_set('display_errors',1);
 error_reporting(E_ALL);
 
@@ -24,7 +25,13 @@ $result = (string)shell_exec("python newUploadFile.py $filename $tempLocation 2>
 if(strstr($result, 'ERROR')) {
 	echo $result;
 } else {
-	echo $result;
+	//Delete the 'old' file
+	echo unlink('Database//' . $filename);
+	echo chmod('Database//blah.txt',0777);
+	echo unlink('Database//blah.txt');
+	//Copy the 'new' file to the database
+	echo copy($tempLocation,'Database//' . $filename);
+
 	//Call the backup program
 	echo shell_exec("python NewBackupBot.py");
 	
