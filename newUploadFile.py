@@ -122,4 +122,4 @@ for i in range(len(wb_original.worksheets)):
 #original data was successfully found in the new data
 #So, replace the existing DB file with the uploaded file
 print os.remove(databaseDIR + filename)
-print shutil.copy2(location, databaseDIR + filename)
+#print shutil.copyfile(location, databaseDIR + filename)

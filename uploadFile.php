@@ -13,8 +13,6 @@ error_reporting(E_ALL);
 
 //Get the uploaded files temp location
 $tempLocation = $_FILES["file"]["tmp_name"];
-echo $tempLocation;
-echo "\n";
 
 //Get our filename
 $filename = $_FILES["file"]["name"];
