@@ -4,6 +4,15 @@
  * Homepage for AtomPy.
  */
 ?>
+<?php
+//TEST FOR PERMISSIONS
+ini_set('display_errors',1);
+error_reporting(E_ALL);
+$fl = fopen("Database//test.txt","w");
+fwrite($fl,"hello");
+fclose($fl);
+unlink("Database//test.txt");
+?>
 <html>
 <center>
 <h2><b>AtomPy Prototype Website</b></h2>

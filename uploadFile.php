@@ -27,16 +27,14 @@ if(strstr($result, 'ERROR')) {
 } else {
 	//Delete the 'old' file
 	echo unlink('Database//' . $filename);
-	echo chmod('Database//blah.txt',0777);
-	echo unlink('Database//blah.txt');
+
 	//Copy the 'new' file to the database
 	echo copy($tempLocation,'Database//' . $filename);
 
-	//Call the backup program
-	echo shell_exec("python NewBackupBot.py");
-	
 	//Print Success
 	echo "SUCCESSFULLY UPLOADED FILE!";
 }
+//Call the backup program
+echo shell_exec("python NewBackupBot.py");
 
 ?>
