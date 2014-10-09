@@ -25,7 +25,7 @@ N: <input type="text" name="N" size="2"><br><br>
 <br><input type="submit" value="Request File">
 </form><br><br>
 <h4>Upload Files To AtomPy Database</h4>
-<p>Guidelines: TODO</p>
+<p>Guidelines: Download the file you wish to add data to. You can then add columns to the end of the existing data or you can insert rows. When you believe you have added all of your data into the file, upload it and a script will make sure that the file's original data was kept intact.</p>
 <form action="uploadFile.php" method="post" enctype="multipart/form-data">
 <label for="file">Filename:</label>
 <input type="file" name="file" id="file">

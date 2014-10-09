@@ -61,6 +61,7 @@ webpage = ''
 #Add backup revisions selection table
 avaliableBackups = []
 backupFolders = os.listdir('Backups//')
+backupFolders = [x for x in backupFolders if 'old' not in x]
 webpage += '<table style="width:300px">'
 for i in range(len(backupFolders)):
 	if filename in os.listdir('Backups//' + backupFolders[i]):

@@ -26,15 +26,15 @@ if(strstr($result, 'ERROR')) {
 	echo $result;
 } else {
 	//Delete the 'old' file
-	echo unlink('Database//' . $filename);
+	unlink('Database//' . $filename);
 
 	//Copy the 'new' file to the database
-	echo copy($tempLocation,'Database//' . $filename);
+	copy($tempLocation,'Database//' . $filename);
+	
+	//Call the backup bot
+	echo shell_exec("python NewBackupBot.py");
 
 	//Print Success
 	echo "SUCCESSFULLY UPLOADED FILE!";
 }
-//Call the backup program
-echo shell_exec("python NewBackupBot.py");
-
 ?>
