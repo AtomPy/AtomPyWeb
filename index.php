@@ -21,7 +21,7 @@ unlink("Database//test.txt");
 <form action="downloadFile.php" method="post">
 Z: <input type="text" name="Z" size="2">
 N: <input type="text" name="N" size="2"><br><br>
-<input type="radio" name="database" value="atompy">Download from AtomPy Database<br>
+<input type="radio" name="database" value="atompy" checked>Download from AtomPy Database<br>
 <br><input type="submit" value="Request File">
 </form><br><br>
 <h4>Upload Files To AtomPy Database</h4>
