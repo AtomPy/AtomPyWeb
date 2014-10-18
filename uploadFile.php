@@ -35,6 +35,6 @@ if(strstr($result, 'ERROR')) {
 	echo shell_exec("python NewBackupBot.py");
 
 	//Print Success
-	echo "SUCCESSFULLY UPLOADED FILE!";
+	echo "<a href='index.php'>Home</a><br>SUCCESSFULLY UPLOADED FILE!";
 }
 ?>

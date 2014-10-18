@@ -3,6 +3,8 @@
  * Created by Josiah Lucas Boswell (www.josiahboswell.com)
  * Takes queries and sends them to the python script.
  */
+ini_set('display_errors',1);
+error_reporting(E_ALL);
 ?>
 <style>
 table,th,td
@@ -18,8 +20,11 @@ text-align: right;
 text-align: left;
 }
 </style>
-
+<a href="index.php">Home</a>
 <?php
+ini_set('display_errors',1);
+error_reporting(E_ALL);
+
 //Get our args
 $Z = (string)$_POST["Z"];
 $N = (string)$_POST["N"];

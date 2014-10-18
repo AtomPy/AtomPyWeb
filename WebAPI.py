@@ -58,36 +58,39 @@ for i in range(len(ws.rows)):
 #when we are all done
 webpage = ''
 
+#Display what version of the database we are on
+webpage += '<br>Current Displaying: '
+if BackupArg == '-1':
+	webpage += 'Most Recent Version'
+else:
+	webpage += str(BackupArg)
+
 #Add backup revisions selection table
 avaliableBackups = []
 backupFolders = os.listdir('Backups//')
 backupFolders = [x for x in backupFolders if 'old' not in x]
-webpage += '<table style="width:300px">'
 for i in range(len(backupFolders)):
 	if filename in os.listdir('Backups//' + backupFolders[i]):
 		avaliableBackups.append(backupFolders[i])
 if len(avaliableBackups) == 0:
-	webpage += '<tr><td>No backups for this file avaliable...</td></tr>'
+	webpage += '<br>No backups for this data sheet.<br>'
 else:
-	webpage += '<tr><td>Backups avaliable:<br></td></tr>'
-	#Show option for the current version of the file
-	webpage += '<tr><td><form action="viewFile.php" method="post">'
+	webpage += '<br>Backups avaliable:<br>'
+	webpage += '<form action="viewFile.php" method="post">'
 	webpage += '<input type="hidden" name="Z" value=' + str(Z)
 	webpage += '><input type="hidden" name="N" value=' + str(N)
 	webpage += '><input type="hidden" name="SheetNum" value=' + str(SheetNum)
-	webpage += '><input type="hidden" name="BackupArg" value="-1">'
-	webpage += '<input type="submit" value="Current Version"></form></td></tr>'
+	webpage += '><select name="BackupArg">'
+
+	#Show option for the current version of the file
+	webpage += '<option name="BackupArg" value="-1">Current Version</option>'
+
 	#Show options for the last versions of the file
 	for i in range(len(avaliableBackups)):
-		webpage += '<tr><td><form action="viewFile.php" method="post">'
-		webpage += '<input type="hidden" name="Z" value=' + str(Z)
-		webpage += '><input type="hidden" name="N" value=' + str(N)
-		webpage += '><input type="hidden" name="SheetNum" value=' + str(SheetNum)
-		webpage += '><input type="hidden" name="BackupArg" value="'
+		webpage += '<option name="BackupArg" value="'
 		webpage += avaliableBackups[i] + '">'
-		webpage += '<input type="submit" value="' + avaliableBackups[i]
-		webpage += '"></form></td></tr>'
-webpage += '</table><br><br>'
+		webpage += avaliableBackups[i] + '</option>'
+	webpage += '</select><br><input type="submit" value="Submit"></form>'
 
 #Add the sheet selection table
 webpage += '<table style="width:300px"><tr>'
