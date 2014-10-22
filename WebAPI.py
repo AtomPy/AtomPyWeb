@@ -113,9 +113,14 @@ webpage += '<table>'
 for i in range(len(column_widths)):
 	webpage += "<col width='" + str(column_widths[i]*10) + "'>"
 
+#Create the storage for the stylings dictionary
+styles = {}
+
+#Go through all of the cells and do the CSS stylings
 for i in range(len(ws.rows)):
 	webpage += "<tr>"
 	for j in range(len(ws.columns)):
+		
 		#First, get out current cell (cCell)
 		cCell = ws.cell(row = i+1, column = j+1)
 		
@@ -136,6 +141,24 @@ for i in range(len(ws.rows)):
 			#No styling needed, print out nothing but the row end
 			webpage += "</td>"
 		else:
+		
+			#Begin to figure out what style we are dealing with
+			temp = {'font size':cCell.style.font.sz,
+					'font family':cCell.style.font.name,
+					'font weight':cCell.style.font.b,
+					'font italic':cCell.style.font.i}
+					
+			#Now see if it is already in our current style listing
+			cStyle = styles
+			for i in range(len(styles)):
+				if temp == styles[i]:
+					cStyle = i
+					
+			#If we don't have it, create it
+			if cStyle ~= -1:
+				styles.append(temp)
+			
+			
 			webpage += "<style>custom"
 			webpage += str(counter)
 			
@@ -161,9 +184,9 @@ for i in range(len(ws.rows)):
 			#Add decimals, commas to numbers
 			if not (type(cCell.value) is unicode):
 				if not (cCell.style.number_format == 'Scientific'):
-					cCell.value = locale.format("%.2f", cCell.value, grouping= True)
+					cCell.value = locale.format("%.2f", cCell.value, grouping=True)
 				else:
-					cCell.value = locale.format("%.4E", cCell.value, grouping= True)
+					cCell.value = locale.format("%.4E", cCell.value, grouping=True)
 			
 			#Hyperlink handling
 			if type(cCell.value) is unicode:
