@@ -113,9 +113,6 @@ webpage += '<table>'
 for i in range(len(column_widths)):
 	webpage += "<col width='" + str(column_widths[i]*10) + "'>"
 
-#Create the storage for the stylings dictionary
-styles = {}
-
 #Go through all of the cells and do the CSS stylings
 for i in range(len(ws.rows)):
 	webpage += "<tr>"
@@ -141,46 +138,6 @@ for i in range(len(ws.rows)):
 			#No styling needed, print out nothing but the row end
 			webpage += "</td>"
 		else:
-		
-			#Begin to figure out what style we are dealing with
-			temp = {'font size':cCell.style.font.sz,
-					'font family':cCell.style.font.name,
-					'font weight':cCell.style.font.b,
-					'font italic':cCell.style.font.i}
-					
-			#Now see if it is already in our current style listing
-			cStyle = styles
-			for i in range(len(styles)):
-				if temp == styles[i]:
-					cStyle = i
-					
-			#If we don't have it, create it
-			if cStyle ~= -1:
-				styles.append(temp)
-			
-			
-			webpage += "<style>custom"
-			webpage += str(counter)
-			
-			#Font family and font size
-			webpage += "{font-family: '" + cCell.style.font.name
-			webpage += "'; font-size:" + str((cCell.style.font.sz/10.0)*100) + "%;"
-			
-			#Bold
-			if cCell.style.font.b == True:
-				webpage += "font-weight: bold;"
-			else:
-				webpage += "font-weight: normal;"
-			
-			#Italic
-			if cCell.style.font.i == True:
-				webpage += "font-style: italic;"
-			else:
-				webpage += "font-style: normal;"
-			
-			#Finish off the css style for this cell
-			webpage += "}</style><custom" + str(counter) + ">"
-			
 			#Add decimals, commas to numbers
 			if not (type(cCell.value) is unicode):
 				if not (cCell.style.number_format == 'Scientific'):
@@ -200,7 +157,7 @@ for i in range(len(ws.rows)):
 			webpage += str(cCell.value)
 			
 			#End the column
-			webpage += "</custom" + str(counter) + "></td>";
+			webpage += "</td>";
 			counter = counter + 1;
 		
 		#Skip to next row if this cell was a header row
