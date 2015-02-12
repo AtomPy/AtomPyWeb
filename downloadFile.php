@@ -1,37 +1,39 @@
 <?php
 /* Download File PHP Script for AtomPy 2.0
+ *
  * Created by Josiah Lucas Boswell (www.josiahboswell.com)
- * Takes arguements for the file the user wants and either
- * downloads the file from Google Drive or finds it in the
- * local AtomPy database. The file is then pushed to the
- * browser.
+ *
+ * Takes the Z and N args for the file the user wants. The filename is built and is searched for in the database. The file is then sent to
+ * the user's browser for download.
  */
  
-//Get our args
-$Z = (string)$_POST["Z"];
-$N = (string)$_POST["N"];
-$database = (string)$_POST["database"];
+//Get our args (Z, N)
+$Z = (int)$_POST["Z"];
+$N = (int)$_POST["N"];
 
-//Now get our file via our python download bot
-$filename = (string)shell_exec("python download-bot.py $Z $N $database");
-$filename = substr($filename, 0, -1);
-if(!strstr($filename, 'ERROR')) {
-	//Now send the file to the browser
-	header("Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-	header("Content-Disposition: attachment; filename=$filename");
-	header("Pragma: no-cache");
-	header("Expires: 0");
-	header("Content-Transfer-Encoding: binary");
-	if(strstr($database,'google')) {
-		readfile('TempFiles//' . $filename, true);
-		unlink('TempFiles//' . $filename);
-	}
-	if(strstr($database,'atompy')) {
-		readfile('Database//' . $filename, true);
-	}
-	
-} else {
-	print $filename;
+//Validate numbers
+if($Z < 0) $Z = 0;
+if($N < 0) $N = 0;
+
+//Build the filename
+$filename = "";
+if($Z < 10) $filename = $filename . "0" . (string)$Z;
+else $filename = $filename . (string)$Z;
+if($N < 10) $filename = $filename . "0" . (string)$N;
+else $filename = $filename . (string)$N;
+
+//Find out if the file exists in the database
+if(!file_exists('Database//' . $filename)) {
+	echo "<p><a href='index.php'>Home</a><br>ERROR: File not found.</p>";
+	exit(1);
 }
+
+//Send the file to the user's browser
+header("Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+header("Content-Disposition: attachment; filename=$filename");
+header("Pragma: no-cache");
+header("Expires: 0");
+header("Content-Transfer-Encoding: binary");
+readfile('Database//' . $filename, true);
 
 ?>
