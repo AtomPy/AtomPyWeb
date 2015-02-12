@@ -16,15 +16,17 @@ if($Z < 0) $Z = 0;
 if($N < 0) $N = 0;
 
 //Build the filename
-$filename = "";
-if($Z < 10) $filename = $filename . "0" . (string)$Z;
+$filename = '';
+if($Z < 10) $filename = $filename . '0' . (string)$Z;
 else $filename = $filename . (string)$Z;
-if($N < 10) $filename = $filename . "0" . (string)$N;
+$filename = $filename . '_';
+if($N < 10) $filename = $filename . '0' . (string)$N;
 else $filename = $filename . (string)$N;
+$filename = $filename . '.xlsx';
 
 //Find out if the file exists in the database
 if(!file_exists('Database//' . $filename)) {
-	echo "<p><a href='index.php'>Home</a><br>ERROR: File not found.</p>";
+	echo "<p><a href='index.php'>Home</a><br>ERROR: File not found: " . $filename . "</p>";
 	exit(1);
 }
 
