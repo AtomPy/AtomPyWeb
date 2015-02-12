@@ -1,6 +1,8 @@
 <?php
-/* View File PHP Script for AtomPy 2.0
+/* View File PHP Script for AtomPy 2.1
+ *
  * Created by Josiah Lucas Boswell (www.josiahboswell.com)
+ *
  * Takes queries and sends them to the python script.
  */
 ini_set('display_errors',1);
@@ -32,11 +34,13 @@ $SheetNum = (int)$_POST["SheetNum"];
 $BackupArg = (string)$_POST["BackupArg"];
 
 //Now get our file via our python download bot
+echo date('Y-m-d H:i:s');
 $result = shell_exec("python WebAPI.py $Z $N $SheetNum $BackupArg 2>&1");
-
+echo date('Y-m-d H:i:s');
 //Decode and print the result
 $result = json_decode($result);
+echo date('Y-m-d H:i:s');
 echo $result;
+echo date('Y-m-d H:i:s');
 
-//Created by Josiah Lucas Boswell (www.josiahboswell.com)
 ?>
