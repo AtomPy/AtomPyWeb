@@ -121,7 +121,10 @@ for i in range(len(ws.rows)):
 		cCell = ws.cell(row = i+1, column = j+1)
 		
 		#Begin column with text alignment and spanning
-		webpage += "<td>"
+		webpage += "<td "
+		if i < headerRow-1:
+			webpage += " colspan='" + str(len(ws.columns)) + "'"
+		webpage += ">"
 		
 		#Begin creating the css style for this cell
 		if cCell.value == '' or cCell.value == None:
@@ -158,4 +161,4 @@ for i in range(len(ws.rows)):
 webpage += "</table>"
 
 #Return the webpage to the PHP script
-print webpage
+print webpage)
