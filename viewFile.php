@@ -15,12 +15,6 @@ border:1px solid black;
 border-collapse:collapse;
 padding:5px;
 }
-#right {
-text-align: right;
-}
-#left {
-text-align: left;
-}
 </style>
 <a href="index.php">Home</a>
 <?php
@@ -34,13 +28,9 @@ $SheetNum = (int)$_POST["SheetNum"];
 $BackupArg = (string)$_POST["BackupArg"];
 
 //Now get our file via our python download bot
-echo date('Y-m-d H:i:s');
 $result = shell_exec("python WebAPI.py $Z $N $SheetNum $BackupArg 2>&1");
-echo date('Y-m-d H:i:s');
-//Decode and print the result
-$result = json_decode($result);
-echo date('Y-m-d H:i:s');
+
+//Print the result
 echo $result;
-echo date('Y-m-d H:i:s');
 
 ?>

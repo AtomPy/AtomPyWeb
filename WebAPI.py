@@ -108,7 +108,6 @@ webpage += '</tr></table><br><br>'
 webpage += "Retrieved " + str(len(ws.columns)*len(ws.rows)) + " cells...<br>"
 
 #Display cell data (header and everything)
-counter = 0;
 webpage += '<table>'
 for i in range(len(column_widths)):
 	webpage += "<col width='" + str(column_widths[i]*10) + "'>"
@@ -122,16 +121,7 @@ for i in range(len(ws.rows)):
 		cCell = ws.cell(row = i+1, column = j+1)
 		
 		#Begin column with text alignment and spanning
-		webpage += "<td id='"
-		if cCell.style.number_format == 'General':
-			webpage += "left'"
-		else:
-			webpage += "right'"
-		if i < headerRow-1:
-			webpage += " colspan='"
-			webpage += str(len(ws.columns))
-			webpage += "'"
-		webpage += ">"
+		webpage += "<td>"
 		
 		#Begin creating the css style for this cell
 		if cCell.value == '' or cCell.value == None:
@@ -158,7 +148,6 @@ for i in range(len(ws.rows)):
 			
 			#End the column
 			webpage += "</td>";
-			counter = counter + 1;
 		
 		#Skip to next row if this cell was a header row
 		if i < headerRow:
@@ -169,4 +158,4 @@ for i in range(len(ws.rows)):
 webpage += "</table>"
 
 #Return the webpage to the PHP script
-print json.dumps(webpage)
+print webpage
