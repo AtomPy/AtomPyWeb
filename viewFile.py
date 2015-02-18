@@ -1,5 +1,5 @@
 ########################
-# WebAPI Python Script for AtomPy 2.1
+# ViewFile Python Script for AtomPy 2.1
 #
 # Created by Josiah Lucas Boswell (www.josiahboswell.com)
 #
