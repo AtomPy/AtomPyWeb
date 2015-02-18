@@ -1,44 +1,22 @@
 ########################
-# WebAPI Python Script for AtomPy 2.0
+# WebAPI Python Script for AtomPy 2.1
+#
 # Created by Josiah Lucas Boswell (www.josiahboswell.com)
-# Is called by a PHP script with parameters for Z and N,
-# a paramater for the sheet number, and a backup argument.
-# It then returns the HTML code from a webpage displayment
-# of the requested file.
+#
+# Called from a PHP script with two arguments, filename and sheet number.
+#
 ########################
 
 #Import necessary plugins
-import openpyxl, os, sys, time
-import sys, json, locale
+import openpyxl, os, sys, time, locale
 locale.setlocale(locale.LC_ALL, '')
 
-#Get Z, N, and SheetNum values from the PHP post
-Z = int(sys.argv[1])
-N = int(sys.argv[2])
-SheetNum = int(sys.argv[3])
-BackupArg = str(sys.argv[4])
+#Get filename and sheet number from the PHP script
+filename = str(sys.argv[1])
+SheetNum = int(sys.argv[2])
 
-#Build the filename string
-filename = ''
-if Z < 10:
-	filename = filename + '0' + str(Z)
-else:
-	filename = filename + str(Z)
-filename = filename + '_'
-if N < 10:
-	filename = filename + '0' + str(N)
-else:
-	filename = filename + str(N)
-filename = filename + '.xlsx'
-
-#Now open the file
-wb = None
-if BackupArg == str(-1):
-	wb = openpyxl.load_workbook('Database//' + filename)
-else:
-	wb = openpyxl.load_workbook('Backups//' + BackupArg + '//' + filename)
-
-#Get the sheet
+#Now open the file and grab the sheet
+wb = openpyxl.load_workbook('Database//' + filename)
 ws = wb.get_sheet_by_name(wb.get_sheet_names()[SheetNum])
 
 #Get the column widths
@@ -63,44 +41,15 @@ webpage += '<br>Current Displaying: '
 if BackupArg == '-1':
 	webpage += 'Most Recent Version'
 else:
-	webpage += str(BackupArg)
-
-#Add backup revisions selection table
-avaliableBackups = []
-backupFolders = os.listdir('Backups//')
-backupFolders = [x for x in backupFolders if 'old' not in x]
-for i in range(len(backupFolders)):
-	if filename in os.listdir('Backups//' + backupFolders[i]):
-		avaliableBackups.append(backupFolders[i])
-if len(avaliableBackups) == 0:
-	webpage += '<br>No backups for this data sheet.<br>'
-else:
-	webpage += '<br>Backups avaliable:<br>'
-	webpage += '<form action="viewFile.php" method="post">'
-	webpage += '<input type="hidden" name="Z" value=' + str(Z)
-	webpage += '><input type="hidden" name="N" value=' + str(N)
-	webpage += '><input type="hidden" name="SheetNum" value=' + str(SheetNum)
-	webpage += '><select name="BackupArg">'
-
-	#Show option for the current version of the file
-	webpage += '<option name="BackupArg" value="-1">Current Version</option>'
-
-	#Show options for the last versions of the file
-	for i in range(len(avaliableBackups)):
-		webpage += '<option name="BackupArg" value="'
-		webpage += avaliableBackups[i] + '">'
-		webpage += avaliableBackups[i] + '</option>'
-	webpage += '</select><br><input type="submit" value="Submit"></form>'
+	webpage += str(filename.split('Backups//')[1])
 
 #Add the sheet selection table
 webpage += '<table style="width:300px"><tr>'
 for i in range(len(wb.get_sheet_names())):
 	webpage += '<td><form action="viewFile.php" method="post">'
-	webpage += '<input type="hidden" name="Z" value=' + str(Z)
-	webpage += '><input type="hidden" name="N" value=' + str(N)
+	webpage += '<input type="hidden" name="filename" value=' + str(filename)
 	webpage += '><input type="hidden" name="SheetNum" value=' + str(i)
-	webpage += '><input type="hidden" name="BackupArg" value="-1">'
-	webpage += '<input type="submit" value="' + wb.get_sheet_by_name(wb.get_sheet_names()[i]).title
+	webpage += '><input type="submit" value="' + wb.get_sheet_by_name(wb.get_sheet_names()[i]).title
 	webpage += '"></form></td>'
 webpage += '</tr></table><br><br>'
 
@@ -161,4 +110,4 @@ for i in range(len(ws.rows)):
 webpage += "</table>"
 
 #Return the webpage to the PHP script
-print webpage)
+print webpage
