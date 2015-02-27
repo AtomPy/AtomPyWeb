@@ -14,10 +14,10 @@ locale.setlocale(locale.LC_ALL, '')
 #Get filename and sheet number from the PHP script
 filename = str(sys.argv[1])
 SheetNum = int(sys.argv[2])
-Backups = json.loads(sys.argv[3])
+BackupArg = int(sys.argv[3])
+Backups = json.loads(sys.argv[4])
 for i in range(len(Backups)):
 	print Backups[i]
-
 
 #Now open the file and grab the sheet
 wb = openpyxl.load_workbook('Database//' + filename)
@@ -45,7 +45,7 @@ webpage += '<br>Current Displaying: '
 if BackupArg == '-1':
 	webpage += 'Most Recent Version'
 else:
-	webpage += str(filename.split('Backups//')[1])
+	webpage += str(Backups[BackupArg])
 
 #Add the sheet selection table
 webpage += '<table style="width:300px"><tr>'
