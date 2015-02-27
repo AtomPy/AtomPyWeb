@@ -15,7 +15,8 @@ locale.setlocale(locale.LC_ALL, '')
 filename = str(sys.argv[1])
 SheetNum = int(sys.argv[2])
 BackupArg = int(sys.argv[3])
-Backups = json.loads(sys.argv[4])
+BackupsString = str(sys.argv[4])
+Backups = BackupsString.split(',')
 for i in range(len(Backups)):
 	print Backups[i]
 
@@ -42,7 +43,7 @@ webpage = ''
 
 #Display what version of the database we are on
 webpage += '<br>Current Displaying: '
-if BackupArg == '-1':
+if BackupArg == -1:
 	webpage += 'Most Recent Version'
 else:
 	webpage += str(Backups[BackupArg])

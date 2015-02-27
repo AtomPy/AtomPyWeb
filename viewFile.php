@@ -48,7 +48,7 @@ if(!file_exists('Database//' . $filename)) {
 }
 
 //Does the file have backups avaliable?
-$backups = array();
+$backups = "";
 
 //Open the mysql database
 $conn = new mysqli("localhost","josiah","broncos131","atompy");
@@ -59,9 +59,12 @@ $sql = "select * from backup where file='" . $filename . "'";
 $result = $conn->query($sql);
 if($result->num_rows > 0) {
 	while($row = $result->fetch_assoc()) {
-		array_push($backups, $row["backupDateTime"]);
+		$backups = $backups . $row["backupDateTime"] . ",";
 	}
 }
+$backups = str_replace(" ", "-", $backups);
+$backups = rtrim($backups, ",");
 
 //Call our python script and print out the excel file to the browser
-echo shell_exec("python viewFile.py $filename $SheetNum $BackupArg" . escapeshellarg(json_encode($backups)));
+echo shell_exec("python viewFile.py $filename $SheetNum $BackupArg $backups");
+?>
