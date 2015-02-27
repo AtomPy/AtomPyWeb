@@ -9,10 +9,9 @@
 <h2><b>AtomPy Prototype Website</b></h2>
 <h4>Download Files From AtomPy Database</h4>
 <p>Select the Z and N values of the atomic file you wish to download, then hit "Request File".</p>
-<fs action="downloadFile.php" method="post">
+<form action="downloadFile.php" method="post">
 Z: <input type="text" name="Z" size="2">
-N: <input type="text" name="N" size="2"><br><br>
-<input type="radio" name="database" value="atompy" checked>Download from AtomPy Database<br>
+N: <input type="text" name="N" size="2"><br>
 <br><input type="submit" value="Request File">
 </form><br><br>
 <h4>Upload Files To AtomPy Database</h4>
@@ -28,7 +27,7 @@ N: <input type="text" name="N" size="2"><br><br>
 Z: <input type="text" name="Z" size="2">
 N: <input type="text" name="N" size="2">
 <input type="hidden" name="SheetNum" value="0">
-<input type="hidden" name="BackupArg" value="-1">
+<input type="hidden" name="BackupArg" value="-1"><br>
 <br><input type="submit" value="View File">
 </form>
 </center>
