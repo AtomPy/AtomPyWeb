@@ -17,7 +17,7 @@ $filelocation = $_FILES["file"]["tmp_name"];
 $filename = $_FILES["file"]["name"];
 
 //Send the file to the validation bot
-$result = (string)shell_exec("python validationBot.py $filename $tempLocation 2>&1");
+$result = (string)shell_exec("python validationBot.py $filename $filelocation 2>&1");
 
 //See if the validation was successful
 if(strstr($result, 'ERROR')) {
@@ -27,14 +27,7 @@ if(strstr($result, 'ERROR')) {
 
 //If the validation was successful, go ahead and backup the current version of the file and replace
 //the current file with the new one
-
-//First, create the backup directory, and move the current file there
-$backupDir = 'Database//Backups//' . date('Y-m-d-H:i:s') . '//';
-mkdir($backupDir, 0777, true);
-rename('Database//' . $filename, $backupDir . $filename);
-
-//Now move the new file to the database folder
-rename($filelocation, 'Database//' . $filename);
+shell_exec("python backupBot.py $filename $filelocation 2>&1");
 
 //Return user to the homepage
 echo "<a href='index.php'>Home</a><br>SUCCESSFULLY UPLOADED FILE!";
