@@ -64,5 +64,4 @@ if($result->num_rows > 0) {
 }
 
 //Call our python script and print out the excel file to the browser
-echo shell_exec("python viewFile.py $filename $SheetNum $backups 2>&1");
-?>
+echo shell_exec("python viewFile.py $filename $SheetNum" . escapeshellarg(json_encode($backups)));

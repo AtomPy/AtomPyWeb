@@ -14,8 +14,7 @@ locale.setlocale(locale.LC_ALL, '')
 #Get filename and sheet number from the PHP script
 filename = str(sys.argv[1])
 SheetNum = int(sys.argv[2])
-Backups = sys.argv[3]
-
+Backups = json.loads(sys.argv[3])
 for i in range(len(Backups)):
 	print Backups[i]
 
