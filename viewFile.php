@@ -66,5 +66,5 @@ $backups = str_replace(" ", "-", $backups);
 $backups = rtrim($backups, ",");
 
 //Call our python script and print out the excel file to the browser
-echo shell_exec("python viewFile.py $filename $SheetNum $BackupArg $backups");
+echo shell_exec("python viewFile.py $Z $N $SheetNum $BackupArg $backups");
 ?>

@@ -12,13 +12,21 @@ import openpyxl, os, sys, time, locale, json
 locale.setlocale(locale.LC_ALL, '')
 
 #Get filename and sheet number from the PHP script
-filename = str(sys.argv[1])
-SheetNum = int(sys.argv[2])
-BackupArg = int(sys.argv[3])
-BackupsString = str(sys.argv[4])
+Z = int(sys.argv[1])
+N = int(sys.argv[2])
+SheetNum = int(sys.argv[3])
+BackupArg = int(sys.argv[4])
+BackupsString = str(sys.argv[5])
 Backups = BackupsString.split(',')
-for i in range(len(Backups)):
-	print Backups[i]
+
+#Build filename
+filename = ''
+if(Z < 10) filename = filename + '0' + str(Z)
+else filename = filename + str(Z)
+filename = filename + '_'
+if(N < 10) filename = filename + '0' +str(N)
+else filename = filename + str(N)
+filename = filename + '.xlsx'
 
 #Now open the file and grab the sheet
 wb = openpyxl.load_workbook('Database//' + filename)
@@ -39,24 +47,29 @@ for i in range(len(ws.rows)):
 
 #Create our webpage string which will be output to the PHP script
 #when we are all done
-webpage = ''
+webpage = '<br>'
 
-#Display what version of the database we are on
-webpage += '<br>Current Displaying: '
-if BackupArg == -1:
-	webpage += 'Most Recent Version'
+#Display what version of the file we are on and give a select for all available backups of the file
+webpage += '<form action="viewFile.php method="post">File Version: '
+
+#Display the current version as first in the list and then show the remaining ones
+if(BackupArg == -1):
+	webpage += '<option value="-1">Most Recent Version</option>'
+	for i in range(len(Backups)):
+		webpage += '<option value="' + str(i) + '">' + str(Backups[i]) + '</option>'
 else:
-	webpage += str(Backups[BackupArg])
+	webpage += '<option value="' + str(BackupArg) + '">' + str(Backups[BackupArg]) + '</option>'
+	webpage += '<option value="-1">Most Recent Version</option>'
+	for i in range(len(Backups)):
+		if i != BackupArg:
+			webpage += '<option value="' + str(i) + '">' + str(Backups[i]) + '</option>'
 
-#Add the sheet selection table
-webpage += '<table style="width:300px"><tr>'
-for i in range(len(wb.get_sheet_names())):
-	webpage += '<td><form action="viewFile.php" method="post">'
-	webpage += '<input type="hidden" name="filename" value=' + str(filename)
-	webpage += '><input type="hidden" name="SheetNum" value=' + str(i)
-	webpage += '><input type="submit" value="' + wb.get_sheet_by_name(wb.get_sheet_names()[i]).title
-	webpage += '"></form></td>'
-webpage += '</tr></table><br><br>'
+#Finish off the select form
+webpage += '</select><input type="hidden" name="Z" value=' + str(Z)
+webpage += '><input type="hidden" name="N" value=' + str(N)
+webpage += '><input type="hidden" name="SheetNum" value=' + str(SheetNum)
+webpage += '><input type="hidden" name="BackupArg" value=' + str(BackupArg)
+webpage += '><input type="submit" value="Load Backup"></form>'
 
 #Debug print
 webpage += "Retrieved " + str(len(ws.columns)*len(ws.rows)) + " cells...<br>"
