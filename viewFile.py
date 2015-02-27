@@ -8,12 +8,17 @@
 ########################
 
 #Import necessary plugins
-import openpyxl, os, sys, time, locale
+import openpyxl, os, sys, time, locale, json
 locale.setlocale(locale.LC_ALL, '')
 
 #Get filename and sheet number from the PHP script
 filename = str(sys.argv[1])
 SheetNum = int(sys.argv[2])
+Backups = sys.argv[3]
+
+for i in range(len(Backups)):
+	print Backups[i]
+
 
 #Now open the file and grab the sheet
 wb = openpyxl.load_workbook('Database//' + filename)

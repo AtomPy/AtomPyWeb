@@ -4,21 +4,12 @@
  * Homepage for AtomPy.
  */
 ?>
-<?php
-//TEST FOR PERMISSIONS
-ini_set('display_errors',1);
-error_reporting(E_ALL);
-$fl = fopen("Database//test.txt","w");
-fwrite($fl,"hello");
-fclose($fl);
-unlink("Database//test.txt");
-?>
 <html>
 <center>
 <h2><b>AtomPy Prototype Website</b></h2>
 <h4>Download Files From AtomPy Database</h4>
-<p>Enter the Z and N values of the atomic file you wish to download, then hit "Request File".</p>
-<form action="downloadFile.php" method="post">
+<p>Select the Z and N values of the atomic file you wish to download, then hit "Request File".</p>
+<fs action="downloadFile.php" method="post">
 Z: <input type="text" name="Z" size="2">
 N: <input type="text" name="N" size="2"><br><br>
 <input type="radio" name="database" value="atompy" checked>Download from AtomPy Database<br>

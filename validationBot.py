@@ -1,6 +1,7 @@
 ########################
-# Upload File Python Script for AtomPy 2.0
-# Created by Josiah Lucas Boswell (www.josiahboswell.com)
+# Upload File Python Script for AtomPy 2.1
+#
+# Created by Josiah 'Lucas' Boswell (www.josiahboswell.com)
 #
 # This program will take the file the user uploaded and the file
 # currently in the database and compare the two for data validation.
