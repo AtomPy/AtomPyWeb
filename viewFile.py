@@ -21,12 +21,16 @@ Backups = BackupsString.split(',')
 
 #Build filename
 filename = ''
-if(Z < 10) filename = filename + '0' + str(Z)
-else filename = filename + str(Z)
-filename = filename + '_'
-if(N < 10) filename = filename + '0' +str(N)
-else filename = filename + str(N)
-filename = filename + '.xlsx'
+if(Z < 10):
+	filename += '0' + str(Z)
+else:
+	filename += str(Z)
+filename +=  '_'
+if(N < 10):
+	filename += '0' +str(N)
+else:
+	filename += str(N)
+filename += '.xlsx'
 
 #Now open the file and grab the sheet
 wb = openpyxl.load_workbook('Database//' + filename)
