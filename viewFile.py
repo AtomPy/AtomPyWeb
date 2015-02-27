@@ -75,13 +75,13 @@ webpage += '><input type="hidden" name="SheetNum" value=' + str(SheetNum)
 webpage += '><input type="submit" value="Load Backup"></form>'
 
 #Selection of sheets
-webpage += '<br><form action="viewFile.php" method="post">Select Sheet: <select name="SheetNum">'
+webpage += '<form action="viewFile.php" method="post">Select Sheet: <select name="SheetNum">'
 for i in range(len(wb.get_sheet_names())):
-	webpage += '<option value="' + i + '">' + wb.get_sheet_by_name(wb.get_sheet_names()[i]) + '</option>'
+	webpage += '<option value="' + str(i) + '">' + wb.get_sheet_names()[i] + '</option>'
 webpage += '</select><input type="hidden" name="Z" value=' + str(Z)
 webpage += '><input type="hidden" name="N" value=' + str(N)
 webpage += '><input type="hidden" name="BackupArg" value=' + str(BackupArg)
-webpage += '><input type="submit" value="Load Backup"></form>'
+webpage += '><input type="submit" value="Load Sheet"></form>'
 
 #Debug print
 webpage += "Retrieved " + str(len(ws.columns)*len(ws.rows)) + " cells...<br>"

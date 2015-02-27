@@ -27,7 +27,7 @@ if(strstr($result, 'ERROR')) {
 
 //If the validation was successful, go ahead and backup the current version of the file and replace
 //the current file with the new one
-shell_exec("python backupBot.py $filename $filelocation 2>&1");
+echo shell_exec("python backupBot.py $filename $filelocation 2>&1");
 
 //Return user to the homepage
 echo "<a href='index.php'>Home</a><br>SUCCESSFULLY UPLOADED FILE!";
