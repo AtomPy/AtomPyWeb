@@ -1,5 +1,5 @@
 <?php
-/* Download File PHP Script for AtomPy 2.0
+/* Download File PHP Script for AtomPy 2.1
  *
  * Created by Josiah Lucas Boswell (www.josiahboswell.com)
  *
