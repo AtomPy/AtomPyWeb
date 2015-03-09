@@ -23,28 +23,43 @@ Link: <input type="text" name="link" size="100"><br>
 </html>
 
 <?php
+//Open the mysql database
+$conn = new mysqli("localhost","josiah","broncos131","atompy");
+if($conn->connect_error) {
+	die("Connection failed: " . $conn->connect_error);
+}
+
 if(isset($_POST["title"])) {
 	if(isset($_POST["link"])) {
-		
-		//Open the mysql database
-		$conn = new mysqli("localhost","josiah","broncos131","atompy");
-		if($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-		}
-		
-		#Look for the link or title already in the source table
-		$sql = "select * from source where link like '%" + $_POST["link"] + "%' or title like '%" + $_POST["title"] + "%'";
-		$result = $conn->query($sql);
-		if($result->num_rows > 0) {
-			echo "<br>Already some entries with info you entered.<br>";
-			while($row = $result->fetch_assoc()) {
-				echo $row["title"] . ', ' . $row["link"] . "<br>";
+	
+		if($_POST["title"] != '') {
+			if($_POST["link"] != '') {
+				
+				#Look for the link or title already in the source table
+				$sql = "select * from source where link like '%" + $_POST["link"] + "%' or title like '%" + $_POST["title"] + "%'";
+				$result = $conn->query($sql);
+				if($result->num_rows > 0) {
+					echo "<br>Already some entries with info you entered.<br>";
+					while($row = $result->fetch_assoc()) {
+						echo $row["title"] . ', ' . $row["link"] . "<br>";
+					}
+				} else {
+					$sql = "insert into source(link, title) where values('" + $_POST["link"] + "', '" + $_POST["title"] + "')";
+					$result = $conn->query($sql);
+				}
+				
 			}
-		} else {
-			$sql = "insert into source(link, title) where values('" + $_POST["link"] + "', '" + $_POST["title"] + "')";
-			$result = $conn->query($sql);
 		}
 		
+	}
+}
+
+//Show the current sources
+$sql = "select * from source";
+$result = $conn->query($sql);
+if($result->num_rows > 0) {
+	while($row = $result->fetch_assoc()) {
+		echo $row["id"] . "\t" . $row["link"] . "\t" . $row["title"] . "<br>";
 	}
 }
 
