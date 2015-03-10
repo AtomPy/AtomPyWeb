@@ -36,7 +36,7 @@ if(isset($_POST["title"])) {
 			if($_POST["link"] != '') {
 				
 				#Look for the link or title already in the source table
-				$sql = "select * from source where link like '%" + $_POST["link"] + "%' or title like '%" + $_POST["title"] + "%'";
+				$sql = "select * from source where link like '%" . $_POST["link"] . "%' or title like '%" . $_POST["title"] . "%'";
 				$result = $conn->query($sql);
 				if($result->num_rows > 0) {
 					echo "<br>Already some entries with info you entered.<br>";
@@ -44,7 +44,8 @@ if(isset($_POST["title"])) {
 						echo $row["title"] . ', ' . $row["link"] . "<br>";
 					}
 				} else {
-					$sql = "insert into source(link, title) where values('" + $_POST["link"] + "', '" + $_POST["title"] + "')";
+					$sql = "insert into source(link, title)  values('" . $_POST["link"] . "', '" . $_POST["title"] . "')";
+					echo $sql . "<br>";
 					$result = $conn->query($sql);
 				}
 				
@@ -57,9 +58,10 @@ if(isset($_POST["title"])) {
 //Show the current sources
 $sql = "select * from source";
 $result = $conn->query($sql);
+echo "<br>";
 if($result->num_rows > 0) {
 	while($row = $result->fetch_assoc()) {
-		echo $row["id"] . "\t" . $row["link"] . "\t" . $row["title"] . "<br>";
+		echo $row["id"] . "<br>" . $row["link"] . "<br>" . $row["title"] . "<br><br>";
 	}
 }
 
