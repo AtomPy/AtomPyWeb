@@ -30,7 +30,7 @@ if(isset($_GET["sourceID"])) {
 	$result = $conn->query($sql);
 	if($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
-			echo $row["title"] . ', ' . $row["link"] . "<br>";
+			echo 'Result for source ID: ' . $row['id'] . "<br>Title: " . $row["title"] . '<br>Link: ' . $row["link"] . "<br>";
 		}
 	}
 }
