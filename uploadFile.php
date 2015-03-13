@@ -16,13 +16,23 @@ error_reporting(E_ALL);
 $filelocation = $_FILES["file"]["tmp_name"];
 $filename = $_FILES["file"]["name"];
 
-//Move the file from the default upload file location to the real uploads folder
-move_uploaded_file($filelocation, 'Uploads/' . $filename);
-chmod('Uploads/' . $filename, 0777);
+//Make sure the file trying to be uploaded is not already in the uploads folder and thus not already being processed
+if(!file_exists('Uploads/' . $filename)) {
 
-//Now call the verification/validation/hyperlink-adding/other stuffs script
-exec("python uploadFile.py >/dev/null &");
+	//Move the file from the default upload file location to the real uploads folder
+	move_uploaded_file($filelocation, 'Uploads/' . $filename);
 
-//Return user to the homepage
-echo "<a href='index.php'>Home</a><br>Uploaded file queued. Please wait.";
+	//Fix permissions so that the new file isn't write-only
+	chmod('Uploads/' . $filename, 0777);
+
+	//Now call the verification/validation/hyperlink-adding/other stuffs script
+	//This script is called as a background process so that the user does not have to wait
+	exec("python uploadFile.py $filename >/dev/null &");
+
+	//Return user to the homepage
+	echo "<a href='index.php'>Home</a><br>Uploaded file queued. Please wait.";
+	
+} else {
+	echo "<a href='index.php'>Home</a><br>ERROR: The file you wish to upload is already in the processing folder. Please give the server a few minutes to catch up.";
+}
 ?>
