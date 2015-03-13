@@ -3,7 +3,7 @@
  *
  * Created by Josiah 'Lucas' Boswell (www.josiahboswell.com)
  *
- * Takes a get request for the source value.
+ * Takes a get request for the source metadata.
  */
 
 //Extra debugging  for PHP errors
@@ -30,7 +30,7 @@ if(isset($_GET["sourceID"])) {
 	$result = $conn->query($sql);
 	if($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
-			echo 'Result for source ID: ' . $row['id'] . "<br>Title: " . $row["title"] . '<br>Link: <a href="' . $row['link'] . '">' . $row['link'] . '</a><br>';
+			echo 'Result for source ID: ' . $row['sourceID'] . "<br>Title: " . $row["sourceTitle"] . '<br>Link: <a href="' . $row['sourceLink'] . '">' . $row['sourceLink'] . '</a><br>';
 		}
 	}
 }
