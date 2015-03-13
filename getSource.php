@@ -26,7 +26,7 @@ if($conn->connect_error) {
 if(isset($_GET["sourceID"])) {
 	
 	#Look for the link or title already in the source table
-	$sql = "select * from source where id=" . $_GET["sourceID"];
+	$sql = "select * from sources where sourceID=" . $_GET["sourceID"];
 	$result = $conn->query($sql);
 	if($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {

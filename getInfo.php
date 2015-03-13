@@ -26,18 +26,19 @@ if($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
 
-if(isset($_GET["wb"]) and isset($_GET["sheet"]) and isset($_GET["row"]) and isset($_GET["col"])) {
+if(isset($_GET["workbook"]) and isset($_GET["sheet"]) and isset($_GET["row"]) and isset($_GET["col"])) {
 	
 	#Select the appropriate table entry and display it
-	$sql = "select * from numberMetadata where workbook=" . $_GET["wb"] . " and sheet=" . $_GET["sheet"] . " and row=" . $_GET["row"] . " and col=" . $_GET["col"];
+	$sql = "select * from numberMetadata where workbook='" . $_GET["workbook"] . "' and sheet='" . $_GET["sheet"] . "' and row=" . $_GET["row"] . " and col=" . $_GET["col"];
 	$result = $conn->query($sql);
 	if($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
-			echo 'Result for the following: <br><br>Workbook: ' . $row['workbook'] . "<br>Sheet: " . $row["sheet"] . '<br>Row: ' . $row['row'] . '<br>Column: ' . $row['col'] . '<br><br>Number Value: ' . $row['numberValue'] . '<br>SourceID: <a href="http://141.218.60.56/~jnz1568/getSource.php?sourceID=' . $row['sourceID'] . '>' . $row['sourceID'] . '</a><br>Blog Link: ' . $row['blogLink'];
+			echo 'Result for the following: <br><br>Workbook: ' . $row['workbook'] . "<br>Sheet: " . $row["sheet"] . '<br>Row: ' . $row['row'] . '<br>Column: ' . $row['col'] . '<br><br>Number Value: ' . $row['numberValue'] . '<br>SourceID: <a href="http://141.218.60.56/~jnz1568/getSource.php?sourceID=' . $row['sourceID'] . '">' . $row['sourceID'] . '</a><br>Blog Link: ' . $row['blogLink'];
 		}
 	}
 } else {
-	echo 'Incorrect args or lack of args.';
+	echo 'Incorrect args or lack of args.<br>';
+	print_r($_GET);
 }
 
 ?>
