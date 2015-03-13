@@ -16,19 +16,13 @@ error_reporting(E_ALL);
 $filelocation = $_FILES["file"]["tmp_name"];
 $filename = $_FILES["file"]["name"];
 
-//Send the file to the validation bot
-$result = (string)shell_exec("python validationBot.py $filename $filelocation 2>&1");
+//Move the file from the default upload file location to the real uploads folder
+move_uploaded_file($filelocation, 'Uploads/' . $filename);
+chmod('Uploads/' . $filename, 0777);
 
-//See if the validation was successful
-if(strstr($result, 'ERROR')) {
-	echo $result;
-	exit(1);
-}
-
-//If the validation was successful, go ahead and backup the current version of the file and replace
-//the current file with the new one
-echo shell_exec("python backupBot.py $filename $filelocation 2>&1");
+//Now call the verification/validation/hyperlink-adding/other stuffs script
+exec("python uploadFile.py >/dev/null &");
 
 //Return user to the homepage
-echo "<a href='index.php'>Home</a><br>SUCCESSFULLY UPLOADED FILE!";
+echo "<a href='index.php'>Home</a><br>Uploaded file queued. Please wait.";
 ?>
