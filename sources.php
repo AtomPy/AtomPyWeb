@@ -43,7 +43,7 @@ if(isset($_POST["title"])) {
 			if($_POST["link"] != '') {
 				
 				#Look for the link or title already in the source table
-				$sql = "select * from source where sourceLink like '%" . $_POST["link"] . "%' or sourceTitle like '%" . $_POST["title"] . "%'";
+				$sql = "select * from sources where sourceLink like '%" . $_POST["link"] . "%' or sourceTitle like '%" . $_POST["title"] . "%'";
 				$result = $conn->query($sql);
 				if($result->num_rows > 0) {
 					echo "<br>Already some entries with info you entered.<br>";
@@ -51,7 +51,7 @@ if(isset($_POST["title"])) {
 						echo "Source ID: " . $row["sourceID"] . "<br>Title: " . $row["sourceTitle"] . '<br>Link: ' . $row["sourceLink"] . "<br><br>";
 					}
 				} else {
-					$sql = "insert into source(sourceLink, sourceTitle)  values('" . $_POST["link"] . "', '" . $_POST["title"] . "')";
+					$sql = "insert into sources(sourceLink, sourceTitle)  values('" . $_POST["link"] . "', '" . $_POST["title"] . "')";
 					echo $sql . "<br>";
 					$result = $conn->query($sql);
 				}
@@ -63,13 +63,15 @@ if(isset($_POST["title"])) {
 }
 
 if(isset($_POST["linky"])) {
-	$sql = "select * from source where sourceLink like '%" . $_POST["linky"]  . "%'";
+	$sql = "select * from sources where sourceLink like '%" . $_POST["linky"]  . "%'";
 	$result = $conn->query($sql);
 	if($result->num_rows > 0) {
-		echo "<br>Results for source search:<br>";
+		echo "<br>Results for sources search:<br>";
 		while($row = $result->fetch_assoc()) {
 			echo "Source ID: " . $row["sourceID"] . "<br>Title: " . $row["sourceTitle"] . '<br>Link: ' . $row["sourceLink"] . "<br><br>";
 		}
+	} else {
+		echo "<br>No results.<br>";
 	}
 }
 
