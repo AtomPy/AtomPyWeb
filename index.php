@@ -53,6 +53,11 @@ N: <input type="text" name="N" size="2"><br>
 <p><a href="sources.php">Click here to add/view sources.</a></p>
 <br><br>
 
+<!--Logs System-->
+<h4>View Upload Log</h4>
+<p><a href="logs.php">Click here to view upload logs.</a></p>
+<br><br>
+
 <!--End Homepage-->
 </center>
 </html>
