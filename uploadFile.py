@@ -4,7 +4,9 @@
 # Created by Josiah 'Lucas' Boswell (www.josiahboswell.com)
 #
 # This program will take the file the user uploaded and the file
-# currently in the database and compare the two for data validation.
+# currently in the database and compare the two for data validation. Then
+# create a new workbook that copies the original data from the original file,
+# and then goes ahead and adds the new data and hyperlinks.
 ########################
 
 #Includes

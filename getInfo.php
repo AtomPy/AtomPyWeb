@@ -37,7 +37,7 @@ if(isset($_GET["workbook"]) and isset($_GET["sheet"]) and isset($_GET["row"]) an
 		}
 	}
 } else {
-	echo 'Incorrect args or lack of args.<br>';
+	echo 'Incorrect args or lack of args. Please double check your GET requests.<br>';
 	print_r($_GET);
 }
 

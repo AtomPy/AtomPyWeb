@@ -5,6 +5,11 @@
  *
  * Homepage for AtomPy.
  */
+ 
+ //Extra debugging  for PHP errors
+ini_set('display_errors',1);
+error_reporting(E_ALL);
+
 ?>
 
 <!--Begin Homepage-->
@@ -42,6 +47,11 @@ N: <input type="text" name="N" size="2"><br>
 <input type="file" name="file" id="file">
 <input type="submit" value="Upload File">
 </form><br><br>
+
+<!--Add/View Sources System-->
+<h4>Add/View Sources</h4>
+<p><a href="sources.php">Click here to add/view sources.</a></p>
+<br><br>
 
 <!--End Homepage-->
 </center>
