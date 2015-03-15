@@ -41,7 +41,7 @@ N: <input type="text" name="N" size="2"><br>
 
 <!--Upload File System-->
 <h4>Upload File To Database</h4>
-<p>Guidelines: Download the file you wish to add data to. You can then add columns to the end of the existing data or you can insert rows. When you believe you have added all of your data into the file, upload it and a script will make sure that the file's original data was kept intact.</p>
+<p>Guidelines: Please follow these instructions for a perfect upload.<br>Step 1: Download a file from the database.<br>Step 2: Add your data. This can be either appending columns at the end of sheets or inserting rows.<br>Step 3: Add your source information to the AtomPy database (see below)<br>Step 4: At the top of the columns for your new data columns, add a hyperlink that is simply the number of the sourceID in the sources database of atompy.<br>Step 5: Upload the file and wait for it to be processed. This usually takes a few minutes.<br>Step 6: Check to see if your file upload was successful or not by checking the logs (see below).<br></p>
 <form action="uploadFile.php" method="post" enctype="multipart/form-data">
 <label for="file">Filename:</label>
 <input type="file" name="file" id="file">
