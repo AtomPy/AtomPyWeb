@@ -30,7 +30,7 @@ if(!file_exists('Uploads/' . $filename)) {
 	exec("python uploadFile.py $filename >/dev/null &");
 
 	//Return user to the homepage
-	echo "<a href='index.php'>Home</a><br>Uploaded file queued. Please wait.";
+	echo "<a href='index.php'>Home</a><br>Uploaded file queued. Please wait. You may check if your file was uploaded successfully via the logs on the home page.";
 	
 } else {
 	echo "<a href='index.php'>Home</a><br>ERROR: The file you wish to upload is already in the processing folder. Please give the server a few minutes to catch up.";
