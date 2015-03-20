@@ -71,6 +71,8 @@ def validateFile(original_filename, uploaded_filename):
 			if ws_uploaded.cell(row=j+1, column=1).value == 'Z':
 				cLine_uploaded = j
 				break
+		if cLine_original != cLine_uploaded:
+			return 'ERROR: Rows were added or removed above the category line. This is not allowed.'
 				
 		#Go through the original data and convert the rows to arrays
 		originalRows = []
@@ -109,5 +111,3 @@ def validateFile(original_filename, uploaded_filename):
 			
 	#Return OK
 	return 'OK'
-	
-print validateFile('testing\\original.xlsx','testing\\uploaded.xlsx')
