@@ -29,6 +29,8 @@ def reconstructFile(original_backedup_filename, uploaded_filename, new_filename)
 		'font_color': 'blue',
 		'underline':  1
 	})
+	url_format.set_font_name('Arial')
+	url_format.set_font_size(10)
 	
 	#Header formatting (just bold)
 	header_format = wb_new.add_format()
@@ -36,9 +38,11 @@ def reconstructFile(original_backedup_filename, uploaded_filename, new_filename)
 	header_format.set_font_name('Arial')
 	header_format.set_font_size(10)
 	
-	#Category row / Source Row formatting (gray background)
+	#Category row / Source Row formatting (lgith gray background)
 	category_format = wb_new.add_format()
 	category_format.set_bg_color('#D3D3D3')
+	category_format.set_font_name('Arial')
+	category_format.set_font_size(10)
 
 	#Go through the original, backed-up workbook
 	for i in range(len(wb_original.worksheets)):
@@ -117,13 +121,10 @@ def reconstructFile(original_backedup_filename, uploaded_filename, new_filename)
 					except:
 						sourceID = str(1)
 					
-					
 					if 'HYPERLINK' not in cValue:	
 						ws_new.write(j, k,'=HYPERLINK("http://141.218.60.56/~jnz1568/getSource.php?sourceID=' + sourceID + '","' + cValue + '")', url_format, cValue)
 					else:
 						ws_new.write(j, k, cValue, url_format, cValue.split('","')[1].split('")')[0])
-						
-		#break#REMOVE WHEN DONE
 		
 	#Close the workbook
 	wb_new.close()
