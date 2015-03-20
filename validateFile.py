@@ -57,7 +57,9 @@ def validateFile(original_filename, uploaded_filename):
 		
 		#Now we can finally get down to the actual data validation
 		
-		#Rows can be INSERTED
+		#Rows can be INSERTED <-- OLD WAY for now
+		
+		#Rows can be APPENED
 		#Columns can be APPENDED
 		
 		#Find the category data lines for each
@@ -73,7 +75,7 @@ def validateFile(original_filename, uploaded_filename):
 				break
 		if cLine_original != cLine_uploaded:
 			return 'ERROR: Rows were added or removed above the category line. This is not allowed.'
-				
+		
 		#Go through the original data and convert the rows to arrays
 		originalRows = []
 		for j in range(len(ws_original.rows)):
@@ -95,19 +97,10 @@ def validateFile(original_filename, uploaded_filename):
 				uploadedRow.append(cValue)
 			uploadedRows.append(uploadedRow)
 			
-		#The way we will do the validation is as follows:
-		#We will go through all of rows of the original data and try
-		#to find them in the new data
-		found = [-1 for x in xrange(len(ws_original.rows))]
-		
-		#Begin going through the rows
-		for j in range(len(ws_original.rows)):
-			if originalRows[j] in uploadedRows:
-				found[j] = 1
-				
-		#Did we find all of the rows? If not, error out
-		if -1 in found:
-			return 'ERROR: Some original data not found in new data.'
+		#Check to make sure that no rows were INSERTED
+		#this is just temporary
+		if uploadedRows[len(originalRows)-1] != originalRows[len(originalRows)-1]:
+			return 'ERROR: Inserted rows detected. This feature is currently not supported.'
 			
 	#Return OK
 	return 'OK'
