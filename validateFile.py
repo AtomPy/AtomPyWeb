@@ -17,7 +17,7 @@ def validateFile(original_filename, uploaded_filename):
 	wb_uploaded = openpyxl.load_workbook(uploaded_filename)
 
 	#ERROR CHECK: Uploaded file should NOT be smaller than original
-	if os.path.getsize(location) <= os.path.getsize(original_filename):
+	if os.path.getsize(uploaded_filename) <= os.path.getsize(original_filename):
 		return "ERROR: Uploaded file has a size smaller than or equal to the original file."
 		
 	#ERROR CHECK: Uploaded file should have the same number of sheets as the original file
@@ -109,3 +109,5 @@ def validateFile(original_filename, uploaded_filename):
 			
 	#Return OK
 	return 'OK'
+	
+print validateFile('testing\\original.xlsx','testing\\uploaded.xlsx')
