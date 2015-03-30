@@ -4,9 +4,8 @@
 # Created by Josiah 'Lucas' Boswell (www.josiahboswell.com)
 #
 # Takes a file and removes all the empty rows and columns for better memory management.
-# Since we are using xlsxwriter so that we can maintain our hyperlinks, we will create the new
-# file (called pruned_filename), will do the prune, delete the original file, and rename the new one to
-# the name of the original. 
+# Since we are using xlsxwriter so that we can maintain our hyperlinks, then create the new
+# file with the old filename so that it is overwritten. No data is lost in this process.
 #
 # Initial tests show that it will save 40% of data space from eliminating empty rows/cols.
 ########################
@@ -20,7 +19,7 @@ def pruneFile(filename):
 	wb_original = openpyxl.load_workbook(filename)
 
 	#Open up the new workbook
-	wb_new = xlsxwriter.Workbook('pruned_' + filename)
+	wb_new = xlsxwriter.Workbook(filename)
 
 	#Add the url formatting for the new workbook (xlsx formatting)
 	url_format = wb_new.add_format({
