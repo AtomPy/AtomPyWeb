@@ -43,6 +43,11 @@ def reconstructFile(original_backedup_filename, uploaded_filename, new_filename)
 	category_format.set_bg_color('#D3D3D3')
 	category_format.set_font_name('Arial')
 	category_format.set_font_size(10)
+	
+	#Regular formatting (size/font)
+	regular_format = wb_new.add_format()
+	regular_format.set_font_name('Arial')
+	regular_format.set_font_size(10)
 
 	#Go through the original, backed-up workbook
 	for i in range(len(wb_original.worksheets)):
@@ -61,7 +66,7 @@ def reconstructFile(original_backedup_filename, uploaded_filename, new_filename)
 				
 		#Find the category line (validation bot makes sure that it is the same for both the original and uploaded workbooks)
 		categoryLine = -1
-		for j in range(len(ws_original.rows)):
+		for j in range(len (ws_original.rows)):
 			if ws_original.cell(row=j+1, column=1).value == 'Z':
 				categoryLine = j
 				break
@@ -84,6 +89,9 @@ def reconstructFile(original_backedup_filename, uploaded_filename, new_filename)
 			
 				#Get current cell value
 				cValue = ws_original.cell(row=j+1, column=k+1).value
+				
+				#Make a backup of the cValue and then convert to string
+				backup_cValue = cValue
 				try:
 					cValue = str(cValue)
 					if cValue == 'None':
@@ -102,15 +110,15 @@ def reconstructFile(original_backedup_filename, uploaded_filename, new_filename)
 				
 				#Header row will be merged throughout
 				if j == 0 and k == 0:
-					ws_new.merge_range(0, 0, 0, 5, cValue, header_format)
+					ws_new.merge_range(0, 0, 0, len(ws_original.columns)-1, cValue, header_format)
 					
 				#Category row and source row
 				if j > 0 and j <= 2:
 					ws_new.write(j, k, cValue, category_format)
 					
-				#Key Cells
+				#Key Cells (keep original formatting, so numbers and such)
 				if j > 2 and k < dataColumn:
-					ws_new.write(j, k, cValue)
+					ws_new.write(j, k, backup_cValue, regular_format)
 					
 				#Data Cells with hyperlinks
 				if j > 2 and k >= dataColumn:
