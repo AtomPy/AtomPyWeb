@@ -22,7 +22,7 @@ error_reporting(E_ALL);
 <!--View File System-->
 <h4>View Database Files</h4>
 <p>Enter the Z and N values of the atomic files you wish to view.</p>
-<form action="viewFile.php" method="post">
+<form action="viewFile.php" method="get">
 Z: <input type="text" name="Z" size="2">
 N: <input type="text" name="N" size="2">
 <input type="hidden" name="SheetNum" value="0">
@@ -33,7 +33,7 @@ N: <input type="text" name="N" size="2">
 <!--Download File System-->
 <h4>Download Database Files</h4>
 <p>Select the Z and N values of the atomic file you wish to download, then hit "Request File".</p>
-<form action="downloadFile.php" method="post">
+<form action="downloadFile.php" method="get">
 Z: <input type="text" name="Z" size="2">
 N: <input type="text" name="N" size="2"><br>
 <br><input type="submit" value="Request File">

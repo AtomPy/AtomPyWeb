@@ -23,10 +23,10 @@ ini_set('display_errors',1);
 error_reporting(E_ALL);
 
 //Get our args from PHP
-$Z = (int)$_POST["Z"];
-$N = (int)$_POST["N"];
-$SheetNum = (int)$_POST["SheetNum"];
-$BackupArg = (int)$_POST["BackupArg"];
+$Z = (int)$_GET["Z"];
+$N = (int)$_GET["N"];
+$SheetNum = (int)$_GET["SheetNum"];
+$BackupArg = (int)$_GET["BackupArg"];
 
 //Validate numbers
 if($Z < 0) $Z = 0;
@@ -45,13 +45,13 @@ $filename = $filename . '.xlsx';
 if(!file_exists('Database//' . $filename)) {
 	echo "<p><a href='index.php'>Home</a><br>ERROR: File not found: " . $filename . "</p>";
 	exit(1);
-}
+} else echo $filename . '<br>';
 
 //Does the file have backups avaliable?
 $backups = "";
-foreach (glob($filename) as $filenames_found) {
+/*foreach (glob($filename) as $filenames_found) {
 	echo $filenames_found . "<br>";
-}
+}*/
 
 //Call our python script and print out the excel file to the browser
 echo shell_exec("python viewFile.py $Z $N $SheetNum $BackupArg $backups");
