@@ -49,9 +49,9 @@ if(!file_exists('Database//' . $filename)) {
 
 //Does the file have backups avaliable?
 $backups = "";
-/*foreach (glob($filename) as $filenames_found) {
+foreach (glob($filename) as $filenames_found) {
 	echo $filenames_found . "<br>";
-}*/
+}
 
 //Call our python script and print out the excel file to the browser
 echo shell_exec("python viewFile.py $Z $N $SheetNum $BackupArg $backups 2>&1");
