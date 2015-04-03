@@ -17,6 +17,7 @@ def reconstructFile(original_backedup_filename, uploaded_filename, new_filename)
 
 	#Open the original backed up workbook
 	wb_original = openpyxl.load_workbook(original_backedup_filename)
+	workbook_name = original_backedup_filename.split('\\')[len(original_backedup_filename.split('\\'))-1]
 	
 	#Open the uploaded workbook
 	wb_uploaded = openpyxl.load_workbook(uploaded_filename)
@@ -130,7 +131,7 @@ def reconstructFile(original_backedup_filename, uploaded_filename, new_filename)
 						sourceID = str(1)
 					
 					if 'HYPERLINK' not in cValue:	
-						ws_new.write(j, k,'=HYPERLINK("http://141.218.60.56/~jnz1568/getSource.php?sourceID=' + sourceID + '","' + cValue + '")', url_format, cValue)
+						ws_new.write(j, k,'=HYPERLINK("http://141.218.60.56/~jnz1568/getInfo.php?workbook=' + workbook_name + '&sheet=' + wb_original.get_sheet_names()[i] + '&row=' + str(j+1) + '&col=' + str(k+1) + '&number=' + cValue + '&sourceID=' + sourceID + '","' + cValue + '")', url_format, cValue)
 					else:
 						ws_new.write(j, k, cValue, url_format, cValue.split('","')[1].split('")')[0])
 		
