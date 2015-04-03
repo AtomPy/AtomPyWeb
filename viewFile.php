@@ -54,5 +54,5 @@ $backups = "";
 }*/
 
 //Call our python script and print out the excel file to the browser
-echo shell_exec("python viewFile.py $Z $N $SheetNum $BackupArg $backups");
+echo shell_exec("python viewFile.py $Z $N $SheetNum $BackupArg $backups 2>&1");
 ?>

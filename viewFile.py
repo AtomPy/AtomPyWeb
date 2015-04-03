@@ -16,8 +16,12 @@ Z = int(sys.argv[1])
 N = int(sys.argv[2])
 SheetNum = int(sys.argv[3])
 BackupArg = int(sys.argv[4])
-BackupsString = str(sys.argv[5])
-Backups = BackupsString.split(',')
+Backups = ''
+try:
+	BackupsString = str(sys.argv[5])
+	Backups = BackupsString.split(',')
+except:
+	Backups = ''
 
 #Build filename
 filename = ''
