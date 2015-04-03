@@ -58,7 +58,7 @@ for i in range(len(ws.rows)):
 webpage = '<br>'
 
 #Display what version of the file we are on and give a select for all available backups of the file
-webpage += '<form action="viewFile.php" method="post">File Version: <select name="BackupArg">'
+webpage += '<form action="viewFile.php" method="get">File Version: <select name="BackupArg">'
 
 #Display the current version as first in the list and then show the remaining ones
 if(BackupArg == -1):
@@ -79,7 +79,7 @@ webpage += '><input type="hidden" name="SheetNum" value=' + str(SheetNum)
 webpage += '><input type="submit" value="Load Backup"></form>'
 
 #Selection of sheets
-webpage += '<form action="viewFile.php" method="post">Select Sheet: <select name="SheetNum">'
+webpage += '<form action="viewFile.php" method="get">Select Sheet: <select name="SheetNum">'
 for i in range(len(wb.get_sheet_names())):
 	webpage += '<option value="' + str(i) + '">' + wb.get_sheet_names()[i] + '</option>'
 webpage += '</select><input type="hidden" name="Z" value=' + str(Z)
