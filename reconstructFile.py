@@ -11,7 +11,7 @@
 ########################
 
 #Include needed libraries
-import xlsxwriter, openpyxl, sys
+import xlsxwriter, openpyxl, sys, os
 
 def reconstructFile(original_backedup_filename, uploaded_filename, new_filename):
 
@@ -137,5 +137,9 @@ def reconstructFile(original_backedup_filename, uploaded_filename, new_filename)
 		
 	#Close the workbook
 	wb_new.close()
+	print 'Reconstructed file: ' + new_filename
 	
-reconstructFile('testing\\08_06.xlsx','testing\\uploaded.xlsx','testing\\test.xlsx')
+for x in os.listdir('testing\\'):
+	if '.xlsx' in x:
+		print 'Reconstructing file: ' + x
+		reconstructFile('testing\\' + x, 'testing\\' + x, 'testing\\' + x)

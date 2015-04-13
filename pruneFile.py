@@ -11,7 +11,7 @@
 ########################
 
 #Include needed libraries
-import xlsxwriter, openpyxl, sys
+import xlsxwriter, openpyxl, sys, os
 
 def pruneFile(filename):
 
@@ -54,6 +54,7 @@ def pruneFile(filename):
 		
 		#Now create the new worksheet and title it with the original workbook title
 		ws_new = wb_new.add_worksheet(wb_original.get_sheet_names()[i])
+		print 'Pruning sheet: ' + wb_original.get_sheet_names()[i]
 		
 		#Adjust widths
 		adjustedWidths = []
@@ -169,3 +170,5 @@ def pruneFile(filename):
 		
 	#Close the workbook
 	wb_new.close()
+	
+	print 'Pruned: ' + filename
