@@ -11,7 +11,7 @@
 ########################
 
 #Include needed libraries
-import xlsxwriter, openpyxl, sys, os
+import xlsxwriter, openpyxl, sys, os, pruneFile
 
 def reconstructFile(original_backedup_filename, uploaded_filename, new_filename):
 
@@ -141,5 +141,7 @@ def reconstructFile(original_backedup_filename, uploaded_filename, new_filename)
 	
 for x in os.listdir('testing\\'):
 	if '.xlsx' in x:
+		print 'Pruning file: ' + x
+		pruneFile.pruneFile('testing\\' + x)
 		print 'Reconstructing file: ' + x
 		reconstructFile('testing\\' + x, 'testing\\' + x, 'testing\\' + x)
