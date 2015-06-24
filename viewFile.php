@@ -54,5 +54,5 @@ foreach (glob($filename) as $filenames_found) {
 }
 
 //Call our python script and print out the excel file to the browser
-echo shell_exec("java -jar AtomPyServer.jar 2>&1");
+echo shell_exec("java -jar AtomPyServer.jar $Z $N $SheetNum $BackupArg 2>&1");
 ?>
