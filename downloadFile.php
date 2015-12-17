@@ -8,8 +8,8 @@
  */
  
 //Get our args (Z, N)
-$Z = (int)$_POST["Z"];
-$N = (int)$_POST["N"];
+$Z = (int)$_GET["Z"];
+$N = (int)$_GET["N"];
 
 //Validate numbers
 if($Z < 0) $Z = 0;
