@@ -48,16 +48,6 @@ N: <input type="text" name="N" size="2"><br>
 <input type="submit" value="Upload File">
 </form><br><br>
 
-<!--Add/View Sources System-->
-<h4>Add/View Sources</h4>
-<p><a href="sources.php">Click here to add/view sources.</a></p>
-<br><br>
-
-<!--Logs System-->
-<h4>View Upload Log</h4>
-<p><a href="logs.php">Click here to view upload logs.</a></p>
-<br><br>
-
 <!--End Homepage-->
 </center>
 </html>
