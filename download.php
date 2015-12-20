@@ -3,6 +3,6 @@
 ini_set('display_errors',1);
 error_reporting(E_ALL);
 
-echo scandir('Database');
+print_r(scandir('Database'));
 
 ?>
