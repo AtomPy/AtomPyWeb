@@ -33,6 +33,7 @@ if(!file_exists('Uploads/' . $filename)) {
 	if (strpos($result,'ERROR') !== false) {
 		echo 'Something with validation of the file went wrong:<br>';
 		echo $result;
+		unlink('Uploads/' . $filename);
 	} else {
 		
 		//Backup the original file (python script)
@@ -53,5 +54,6 @@ if(!file_exists('Uploads/' . $filename)) {
 	
 } else {
 	echo "You shouldn't be seeing this message. If you are, contact the server admin.";
+	unlink('Uploads/' . $filename);
 }
 ?>
