@@ -43,7 +43,7 @@ $filename = $filename . '.xlsx';
 
 //Does the file exist in the database?
 if(!file_exists('Database//' . $filename)) {
-	echo "<p><a href='athena.physics.wmich.edu'>Home</a><br>ERROR: File not found: " . $filename . "</p>";
+	echo "<p><a href='http://athena.physics.wmich.edu'>Home</a><br>ERROR: File not found: " . $filename . "</p>";
 	exit(1);
 } else echo $filename . '<br>';
 
