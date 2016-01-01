@@ -74,16 +74,5 @@ if(isset($_POST["linky"])) {
 		echo "<br>No results.<br>";
 	}
 }
-
-echo "<br><br><br>";
-
-$sql = "select * from sources";
-$result = $conn->query($sql);
-if($result->num_rows > 0) {
-	echo "<br>Sources List:<br>";
-	while($row = $result->fetch_assoc()) {
-		echo "Source ID: " . $row["sourceID"] . "<br>Title: " . $row["sourceTitle"] . '<br>Link: ' . $row["sourceLink"] . "<br><br>";
-	}
-}
 ?>
 </html>
