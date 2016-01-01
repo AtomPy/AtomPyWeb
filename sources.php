@@ -12,7 +12,7 @@ error_reporting(E_ALL);
 ?>
 
 <html>
-<a href='index.php'>Home</a><br><br>
+<a href='http://athena.physics.wmich.edu?page_id=143'>Home</a><br><br>
 
 <h4>Find Source</h4>
 <p>If you are curious if a source is already in the database, submit the link here.</p>
