@@ -25,14 +25,33 @@ if(!file_exists('Uploads/' . $filename)) {
 	//Fix permissions so that the new file isn't write-only
 	chmod('Uploads/' . $filename, 0777);
 
-	//Now call the verification/validation/hyperlink-adding/other stuffs script
-	//This script is called as a background process so that the user does not have to wait
-	exec("python uploadFile.py $filename >/dev/null &");
-
-	//Return user to the homepage
-	echo "<a href='index.php'>Home</a><br>Uploaded file queued. Please wait. You may check if your file was uploaded successfully via the logs on the home page.";
+	//Validate the file (java script)
+	$arg0 = "validateFile";
+	$arg1 = "Database//" . $filename;
+	$arg2 = "Uploads//" . $filename;
+	$result = shell_exec("java -jar AtomPyServer.jar $arg0 $arg1 $arg2 2>&1");
+	if (strpos($result,'ERROR') !== false) {
+		echo 'Something with validation of the file went wrong:<br>';
+		echo $result;
+	} else {
+		
+		//Backup the original file (python script)
+		exec("python backupFile.py $filename  >/dev/null &");
+		
+		//Move the new file to the database
+		rename('Uploads/' . $filename, 'Database/' . $filename);
+		
+		//Force-format the new file (java script)
+		$arg0 = "formatFile";
+		$arg1 = "Database//" . $filename;
+		$result = shell_exec("java -jar AtomPyServer.jar $arg0 $arg1 2>&1");
+		
+		//Return user to the homepage
+		echo "<a href='https://athena.physics.wmich.edu?page_id=145'>Return</a><br>File uploading! Please allow a few minutes for the file to be properly processed into the database.";
+	
+	}
 	
 } else {
-	echo "<a href='index.php'>Home</a><br>ERROR: The file you wish to upload is already in the processing folder. Please give the server a few minutes to catch up.";
+	echo "You shouldn't be seeing this message. If you are, contact the server admin.";
 }
 ?>
